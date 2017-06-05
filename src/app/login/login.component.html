@@ -1,0 +1,34 @@
+<div class="col-md-3">
+</div>
+<div class="col-md-6">
+
+  <form class="form-horizontal" [formGroup]="formulario">
+
+    <h2 class="form-signin-heading" align="center">Acesso à aplicação</h2>
+
+    <div class="form-group col-md-12">
+      <label for="nome" class="control-label">Usuário</label>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon" id="sizing-addon1">@</span>
+        <input formControlName="nome" id="nome" placeholder="usuario@email.com" required type="text" class="form-control" autofocus aria-describedby="sizing-addon1">
+      </div>
+    </div>
+
+    <div class="form-group col-md-12">
+      <label for="senha" class="control-label">Senha</label>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon" id="sizing-addon1">#</span>
+        <input formControlName="senha" id="senha" required type="password" class="form-control" autofocus aria-describedby="sizing-addon1">
+      </div>
+    </div>
+
+    <div class="form-group col-md-12">
+      <button class="btn btn-lg btn-primary btn-block" type="submit" name="action" (click)="fazerLogin()">
+        <span>Logar</span>
+      </button>
+    </div>
+
+  </form>
+
+</div>
+<div class="col-md-3"></div>
