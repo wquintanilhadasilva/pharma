@@ -28,7 +28,8 @@ import { LogoutComponent } from './logout/logout.component';
     ReactiveFormsModule,
     AppRoutingModule,
     SharedModule,
-    HomeModule
+    HomeModule,
+    BootstrapComponentsModule
   ],
   providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]

@@ -10,7 +10,7 @@ import { PaginaNaoEncontradaComponent } from './shared/pagina-nao-encontrada/pag
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
-  { path: 'home', loadChildren: 'app/home/home.module#HomeModule', canLoad:[AuthGuard], canActivate:[AuthGuard]},
+  { path: 'home', loadChildren: 'app/home/home.module#HomeModule', canLoad: [AuthGuard], canActivate: [AuthGuard]},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PaginaNaoEncontradaComponent }
 ];

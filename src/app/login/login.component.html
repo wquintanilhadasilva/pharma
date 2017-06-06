@@ -1,40 +1,50 @@
-<div class="col-md-3">
-</div>
-<div class="col-md-6">
+<div class="row">
+  <div class="col-md-3 col-sm-1">
+  </div>
+  <div class="col-md-6 col-sm-10">
 
-  <form class="form-horizontal" [formGroup]="formulario">
-    
-    <div class="col-md-12" align="center">
-      <img src="assets/user-login2.png" alt="Avatar" class="avatar">
-      <h2 class="form-signin-heading" align="center">Acesso à aplicação</h2>
-    </div>
-    
-    <div class="form-group col-md-12">
-      <label for="nome" class="control-label">Usuário</label>
-      <div class="input-group input-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">@</span>
-        <input formControlName="nome" id="nome" placeholder="usuario@email.com" required type="text" class="form-control" autofocus aria-describedby="sizing-addon1">
-      </div>
-    </div>
+    <form class="form-horizontal" [formGroup]="formulario">
 
-    <div class="form-group col-md-12">
-      <label for="senha" class="control-label">Senha</label>
-      <div class="input-group input-group-lg">
-        <span class="input-group-addon" id="sizing-addon1">#</span>
-        <input formControlName="senha" id="senha" required type="password" class="form-control" autofocus aria-describedby="sizing-addon1">
+      <div class="col-md-12" align="center">
+        <img src="assets/user-login2.png" alt="Avatar" class="avatar">
+        <h2 class="form-signin-heading" align="center">Acesso à aplicação</h2>
       </div>
-    </div>
 
-    <div class="form-group col-md-12">
-      <div *ngIf="exibirLoginInvalido" class="alert alert-warning" role="alert">
-        <strong>Atenção!</strong> Dados incorretos, verifique e tente novamente!
+      <div class="form-group col-md-12">
+        <label for="nome" class="control-label">Usuário</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">@</span>
+          <input formControlName="nome" id="nome" placeholder="usuario@email.com" required type="text" class="form-control" autofocus
+            aria-describedby="sizing-addon1">
+        </div>
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" name="action" (click)="fazerLogin()">
+
+      <div class="form-group col-md-12">
+        <label for="senha" class="control-label">Senha</label>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="sizing-addon1">#</span>
+          <input formControlName="senha" id="senha" required type="password" class="form-control" autofocus aria-describedby="sizing-addon1">
+        </div>
+      </div>
+
+      <div class="form-group col-md-12">
+        <div *ngIf="exibirLoginInvalido" class="alert alert-warning alert-dismissible" role="alert">
+          <!--button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button-->
+          <strong>Atenção!</strong> Dados incorretos, verifique e tente novamente!
+        </div>
+
+        <!--alert type="warning">
+        <strong>Warning!</strong> Better check yourself, you're <a href="#" class="alert-link">not looking too good</a>.
+      </alert -->
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="action" (click)="fazerLogin()">
         <span>Acessar</span>
       </button>
-    </div>
+      </div>
 
-  </form>
+    </form>
 
+  </div>
+  <div class="col-md-3 col-sm-1"></div>
 </div>
-<div class="col-md-3"></div>
