@@ -1,3 +1,5 @@
+import { Usuario } from './usuario';
+import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -10,17 +12,27 @@ export class LoginComponent implements OnInit {
 
   formulario: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  exibirLoginInvalido = false;
+
+  constructor(private formBuilder: FormBuilder, private autService: AuthService) { }
 
   ngOnInit() {
     this.formulario = this.formBuilder.group({
       nome: [null],
       senha: [null]
     });
+    this.autService.usuarioAutenticadoEmiter.subscribe(
+      (result: boolean) => {
+        if (!result) {
+          this.exibirLoginInvalido = true;
+        }
+      }
+    );
   }
 
-  fazerLogin(){
+  fazerLogin() {
     console.log(this.formulario.value);
+    this.autService.fazerLogin(this.formulario.value);
   }
 
 }
