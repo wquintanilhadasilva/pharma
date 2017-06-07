@@ -18,18 +18,18 @@ export class AuthService {
 
     if (!this.checkNullOrEmpty(usuario)) {
 
-      localStorage.setItem(this.loginKey, this.loginKeyValueFalse);
+      sessionStorage.setItem(this.loginKey, this.loginKeyValueFalse);
       this.usuarioAutenticadoEmiter.emit(false);
 
     } else {
 
       // TODO Injetar o serviço e validar no servidor...
       if ( usuario.nome === 'usuario@email.com' && usuario.senha === '123456') {
-        localStorage.setItem(this.loginKey, this.loginKeyValueTrue);
+        sessionStorage.setItem(this.loginKey, this.loginKeyValueTrue);
         this.usuarioAutenticadoEmiter.emit(true);
         this.router.navigate(['/']);
       } else {
-        localStorage.setItem(this.loginKey, this.loginKeyValueFalse);
+        sessionStorage.setItem(this.loginKey, this.loginKeyValueFalse);
         this.usuarioAutenticadoEmiter.emit(false);
       }
 
@@ -56,7 +56,8 @@ export class AuthService {
   }
 
   usuarioEstaAutenticado(): boolean {
-    const logado = localStorage.getItem(this.loginKey);
+    let logado = sessionStorage.getItem(this.loginKey);
+    console.log(logado);
     return logado === this.loginKeyValueTrue ? true : false;
   }
 

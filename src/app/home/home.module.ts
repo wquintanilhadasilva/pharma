@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { BootstrapComponentsModule } from './../bootstrap-components/bootstrap-components.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -11,10 +11,10 @@ import { SendSheetComponent } from './send-sheet/send-sheet.component';
 
 @NgModule({
   imports: [
+    NgbModule,
     CommonModule,
     FormsModule,
-    HomeRoutingModule,
-    BootstrapComponentsModule
+    HomeRoutingModule
   ],
   declarations: [
     HomeComponent,

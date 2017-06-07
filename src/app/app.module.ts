@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { BootstrapComponentsModule } from './bootstrap-components/bootstrap-components.module';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthService } from './login/auth.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -29,7 +29,7 @@ import { LogoutComponent } from './logout/logout.component';
     AppRoutingModule,
     SharedModule,
     HomeModule,
-    BootstrapComponentsModule
+    NgbModule.forRoot()
   ],
   providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
