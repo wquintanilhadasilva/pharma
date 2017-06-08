@@ -11,40 +11,56 @@
     e aprovação serão exibidos aqui.</p>
 
   <div class="container">
+
     <div class="row">
+
       <div class="col-sm-12 col-md-6 min-height-200">
+        
         <div class=" card card-block">
 
           <div class="form-group row">
             <label class="text-right text-primary col-6">Referência:</label>
             <h5 class="text-left text-info col-6">{{movimento.referencia}}</h5>
           </div>
+
           <div class="form-group row">
             <label class="text-right text-primary col-6">Total de Pedidos:</label>
             <h5 class="text-left text-info col-6">{{movimento.obtemTotalDePedidos()}}</h5>
           </div>
+
           <div class="form-group row">
             <label class="text-right text-primary col-6">Fat. Total (R$):</label>
             <h5 class="text-left text-info col-6">{{movimento.obtemFaturamentoTotal()}}</h5>
           </div>
+
         </div>
+
       </div>
+
       <div class="col-sm-12 col-md-6 min-height-200">
+
         <div class=" card card-block">
+
           <div class="row">
             <div class="col-12">
               <h4 class="text-center text-primary">Margem Global</h4>
             </div>
+
           </div>
 
           <div class="row">
             <div class="col-12">
               <h2 class="display-1 text-success text-center">{{movimento.obtemMargemGlobal()}}</h2>
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
 
   </div>
+  
 </div>
