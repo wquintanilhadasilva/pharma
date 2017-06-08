@@ -1,3 +1,126 @@
 <p>
   send-sheet works!
 </p>
+
+<i class="fa fa-users fa-lg fa-5x" aria-hidden="true"></i>
+<div class="col-md-5">
+  <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker [dayTemplate]="customDay"
+    [markDisabled]="isDisabled" #d="ngbDatepicker">
+  <button type="button" class="btn btn-default" aria-label="Left Align" (click)="d.toggle()">
+    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>a
+    
+  </button>
+  <p>HOME</p>
+</div>
+<p>{{model | json}}</p>
+
+
+<ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled">
+  <span class="custom-day" [class.weekend]="isWeekend(date)" [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth"
+    [class.text-muted]="disabled">
+    {{ date.day }}
+  </span>
+</ng-template>
+
+<div class="form-group">
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd"
+             name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+      <div class="input-group-addon" (click)="d.toggle()" >
+        <i class="fa fa-calendar"></i>
+      </div>
+    </div>
+  </div>
+
+  <p>
+  <ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+  </ngb-alert>
+</p>
+
+
+<ngb-accordion #acc="ngbAccordion">
+  <ngb-panel id="toggle-1" title="First panel">
+    <ng-template ngbPanelContent>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+      aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+      sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+      craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+      occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+      labore sustainable VHS.
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel id="toggle-2" title="Second">
+    <ng-template ngbPanelContent>
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+      aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+      sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+      craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+      occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+      labore sustainable VHS.
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+<p>
+  <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-1')">Toggle first</button>
+  <button class="btn btn-sm btn-outline-primary" (click)="acc.toggle('toggle-2')">Toggle second</button>
+</p>
+
+<p>
+  <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+    Toggle
+  </button>
+</p>
+<div id="collapseExample" [ngbCollapse]="isCollapsed">
+  <div class="card">
+    <div class="card-block">
+      You can collapse this card by clicking Toggle
+    </div>
+  </div>
+</div>
+
+<p>You can easily control dropdowns programmatically using the exported dropdown instance.</p>
+
+<div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+  <button class="btn btn-outline-primary" id="dropdownManual" ngbDropdownToggle>Toggle dropdown</button>
+  <div class="dropdown-menu" aria-labelledby="dropdownManual">
+    <button class="dropdown-item">Action - 1</button>
+    <button class="dropdown-item">Another Action</button>
+    <button class="dropdown-item">Something else is here</button>
+  </div>
+
+  <button class="btn btn-outline-success" (click)="$event.stopPropagation(); myDrop.open();">Open from outside</button>
+  <button class="btn btn-outline-danger" (click)="$event.stopPropagation(); myDrop.close();">Close from outside</button>
+</div>
+
+<button type="button" class="btn btn-secondary" placement="top"
+        ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on top" 
+        #popover="ngbPopover">
+  Open Popover
+</button>
+
+<p>Custom rating template provided as child element</p>
+
+<ngb-rating [(rate)]="currentRate">
+  <ng-template let-fill="fill">
+    <span class="star" [class.filled]="fill === 100">&#9733;</span>
+  </ng-template>
+</ngb-rating>
+<hr>
+<pre>Rate: <b>{{currentRate}}</b></pre>
+<p>
+  Static self-closing alert that disappears after 20 seconds (refresh the page if it has already disappeared)
+</p>
+<ngb-alert *ngIf="!staticAlertClosed" (close)="staticAlertClosed = true">Check out our awesome new features!</ngb-alert>
+
+<hr/>
+
+<p>
+  Show a self-closing success message that disappears after 5 seconds.
+</p>
+<ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = null">{{ successMessage }}</ngb-alert>
+<p>
+  <button class="btn btn-primary" (click)="changeSuccessMessage()">Change message</button>
+</p>
