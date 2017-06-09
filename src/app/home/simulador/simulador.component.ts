@@ -17,4 +17,8 @@ export class SimuladorComponent implements OnInit {
     this.movimento.referencia = '2017/06';
   }
 
+  exibirMensagem(msg) {
+    alert(msg);
+  }
+
 }
