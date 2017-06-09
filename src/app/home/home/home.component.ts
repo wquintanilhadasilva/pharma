@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { ModalComponent } from './../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-home',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  @ViewChild(ModalComponent)
+  public readonly modal: ModalComponent;
 
   constructor() {
    }

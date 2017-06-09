@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,8 @@ import { SimuladorComponent } from './simulador/simulador.component';
     CommonModule,
     FormsModule,
     HomeRoutingModule,
-    NgbModule
+    NgbModule,
+    SharedModule
   ],
   declarations: [
     HomeComponent,
