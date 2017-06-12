@@ -15,7 +15,7 @@
 
     <app-painel></app-painel>
 
-    <!-- Tabela co mos pedidos -->
+    <!-- Tabela com os pedidos -->
 
     <app-lista-pedidos (aprovarPedido)="onAprovarPedido($event)"
                        (reprovarPedido)="onRejeitarPedido($event)"
@@ -24,6 +24,9 @@
 
   </div>
 
+    <div class="row">
+      <router-outlet></router-outlet>
+    </div>
 </div>
 
 <app-modal #modalAprovar>

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { ModalComponent } from './../../shared/modal/modal.component';
+import { ModalComponent } from './../shared/modal/modal.component';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +8,6 @@ import { ModalComponent } from './../../shared/modal/modal.component';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  showDialog = false;
 
   constructor() {
    }

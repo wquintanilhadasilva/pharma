@@ -42,4 +42,8 @@ export class PedidosService {
     return this.listaDePedidos.length;
   }
 
+  public getPedido(id: string): Order {
+    return this.getPedidos().find((p: Order)  => p.number === id);
+  }
+
 }
