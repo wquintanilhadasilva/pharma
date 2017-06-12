@@ -9,6 +9,11 @@ import { HomeComponent } from './home/home.component';
 import { ImportSheetComponent } from './import-sheet/import-sheet.component';
 import { SendSheetComponent } from './send-sheet/send-sheet.component';
 import { SimuladorComponent } from './simulador/simulador.component';
+import { PainelComponent } from './painel/painel.component';
+import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
+
+import { FaturamentoService } from './services/faturamento.service';
+import { PedidosService } from './services/pedidos.service';
 
 @NgModule({
   imports: [
@@ -22,10 +27,16 @@ import { SimuladorComponent } from './simulador/simulador.component';
     HomeComponent,
     ImportSheetComponent,
     SendSheetComponent,
-    SimuladorComponent
+    SimuladorComponent,
+    PainelComponent,
+    ListaPedidosComponent
   ],
   exports: [
     HomeRoutingModule
+  ],
+  providers: [
+    FaturamentoService,
+    PedidosService
   ]
 })
 export class HomeModule { }

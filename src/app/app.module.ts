@@ -1,8 +1,10 @@
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AuthService } from './login/auth.service';
 import { AuthGuard } from './guards/auth.guard';
@@ -23,6 +25,7 @@ import { LogoutComponent } from './logout/logout.component';
   imports: [
     NgbModule.forRoot(),
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,

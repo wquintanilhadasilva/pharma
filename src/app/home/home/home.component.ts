@@ -9,8 +9,7 @@ import { ModalComponent } from './../../shared/modal/modal.component';
 })
 export class HomeComponent implements OnInit {
 
-  @ViewChild(ModalComponent)
-  public readonly modal: ModalComponent;
+  showDialog = false;
 
   constructor() {
    }

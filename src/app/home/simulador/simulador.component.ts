@@ -1,6 +1,9 @@
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+
 import { Order } from './../../domain/Order';
-import { StatusMovimento } from './../../domain/status-movimento';
-import { Component, OnInit } from '@angular/core';
+
+import { PedidosService } from './../services/pedidos.service';
+import { ModalComponent } from './../../shared/modal/modal.component';
 
 @Component({
   selector: 'app-simulador',
@@ -9,29 +12,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SimuladorComponent implements OnInit {
 
-  movimento: StatusMovimento;
+  @ViewChild('modalAprovar') modalAprovar: ModalComponent;
+  @ViewChild('modalReprovar') modalReprovar: ModalComponent;
 
-  pedidoSelecionado: Order;
-
-  constructor() { }
+  constructor(private pedidosService: PedidosService) { }
 
   ngOnInit() {
-    this.movimento = new StatusMovimento();
-    this.movimento.referencia = '06/2017';
   }
 
-  exibirMensagem(msg) {
-    alert(msg);
+  onAprovarPedido(pedido) {
+    this.modalAprovar.show(pedido);
   }
 
-  aprovarPedido() {
+  confirmeAprovar(pedido) {
+    console.log(pedido);
     console.log('aprovado!');
-    console.log(this.pedidoSelecionado);
+     this.fecharDialogo(this.modalAprovar);
   }
 
-  rejeitarPedido() {
-    console.log('rejeitado!');
-    console.log(this.pedidoSelecionado);
+  onRejeitarPedido(pedido) {
+    this.modalReprovar.show(pedido);
+  }
+
+  confirmeReprovar(pedido) {
+    console.log(pedido);
+    console.log('reprovado!');
+    this.fecharDialogo(this.modalReprovar);
+  }
+
+  onEditarPedido(pedido) {
+    console.log('Editar');
+    console.log(pedido);
+  }
+
+  fecharDialogo(dlg: ModalComponent) {
+    if (dlg != null) {
+      dlg.hide();
+    }
   }
 
 }

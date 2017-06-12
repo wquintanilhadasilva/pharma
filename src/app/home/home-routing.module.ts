@@ -11,7 +11,8 @@ const routes: Routes = [
     children: [
       {path: 'simulador', component: SimuladorComponent},
       {path: 'importar', component: ImportSheetComponent},
-      {path: 'processar', component: SendSheetComponent}
+      {path: 'processar', component: SendSheetComponent},
+      { path: '', redirectTo: '/home/simulador', pathMatch: 'full' },
   ]}
 ];
 

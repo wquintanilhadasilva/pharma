@@ -11,7 +11,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'home', loadChildren: 'app/home/home.module#HomeModule', canLoad: [AuthGuard], canActivate: [AuthGuard]},
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/simulador', pathMatch: 'full' },
   { path: '**', component: PaginaNaoEncontradaComponent }
 ];
 
