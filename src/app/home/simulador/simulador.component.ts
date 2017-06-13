@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Order } from './../../domain/Order';
@@ -18,7 +18,9 @@ export class SimuladorComponent implements OnInit {
   @ViewChild('modalAprovar') modalAprovar: ModalComponent;
   @ViewChild('modalReprovar') modalReprovar: ModalComponent;
 
-  constructor(private pedidosService: PedidosService, private router: Router) { }
+  constructor(private pedidosService: PedidosService, private router: Router) {
+    console.log('construtor');
+  }
 
   ngOnInit() {
   }
@@ -45,7 +47,7 @@ export class SimuladorComponent implements OnInit {
 
   onEditarPedido(pedido: Order) {
     // router para o editor do pedido
-     this.router.navigate(['/home/simulador', pedido.number, 'editar']);
+    this.router.navigate(['/home/simulador', pedido.number, 'editar']);
   }
 
   fecharDialogo(dlg: ModalComponent) {

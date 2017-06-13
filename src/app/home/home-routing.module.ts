@@ -11,13 +11,17 @@ import { PedidosResolver } from 'app/home/guards/pedidos-resolver';
 const routes: Routes = [
  {path: '', component: HomeComponent,
     children: [
-      {path: 'simulador', component: SimuladorComponent, children: [
+      {path: 'simulador', component: SimuladorComponent /*, children: [
           { path: ':id/editar',
             component: EditarPedidosComponent,
             resolve: {pedido: PedidosResolver}
           }
-        ]
+        ]*/
       },
+      { path: 'simulador/:id/editar',
+            component: EditarPedidosComponent,
+            resolve: {pedido: PedidosResolver}
+          },
       {path: 'importar', component: ImportSheetComponent},
       {path: 'processar', component: SendSheetComponent},
       {path: '', redirectTo: '/home/simulador', pathMatch: 'full'}

@@ -15,7 +15,7 @@ export class FaturamentoService {
 
   getFaturamento(): Faturamento {
 
-    FaturamentoService.movimento.referencia = '06/2017';
+    FaturamentoService.movimento.referencia = this. obtemReferenciaAtual();
     FaturamentoService.movimento.faturamentoGlobal = this.obtemFaturamentoTotal();
     FaturamentoService.movimento.margemGlobal = this.obtemMargemGlobal();
     FaturamentoService.movimento.qtdePedidosGlobal = this.pedidosService.obtemTotalDePedidos();
@@ -41,6 +41,10 @@ export class FaturamentoService {
       }
     );
     return total;
+  }
+
+  public obtemReferenciaAtual() {
+    return '06/2017';
   }
 
 }

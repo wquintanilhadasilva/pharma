@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { FaturamentoService } from './../services/faturamento.service';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -17,7 +18,8 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
 
   constructor(
     private activateRouted: ActivatedRoute,
-    private route: Router
+    private route: Router,
+    private faturamentoService: FaturamentoService
   ) { }
 
   ngOnInit() {

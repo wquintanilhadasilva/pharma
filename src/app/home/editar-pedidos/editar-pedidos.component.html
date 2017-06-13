@@ -1,2 +1,106 @@
-<button (click)="voltar()">Fechar</button>
-<p>{{pedido | json}}</p>
+<div class="row text-center text-primary">
+    <div class="col-12">
+        <h4>Editar Pedido</h4>
+    </div>
+</div>
+<div class="box">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <h5 class="text-center text-primary">
+                            <small>Dados Globais</small>
+                        </h5>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-4">
+                        <h6><small>
+                            Referência
+                            <br/>
+                            {{faturamentoService.obtemReferenciaAtual()}}
+                        </small></h6>
+                    </div>
+                    <div class="col-4">
+                        <h6><small>
+                            Fat. Global
+                            <br/>
+                            {{faturamentoService.obtemFaturamentoTotal() | currency:'BRL':true:'3.2'}}
+                        </small></h6>
+                    </div>
+                    <div class="col-4">
+                        <h6><small>
+                            Margem Global
+                            <br/>
+                            {{faturamentoService.obtemMargemGlobal() | number:'1.2'}}
+                        </small></h6>
+                    </div>
+                </div>
+                <hr>
+                <div class="row text-center">
+                    <div class="col-12">
+                        <h5 class="text-center text-primary">
+                            <small>Dados do Pedido: {{pedido.number}}</small>
+                        </h5>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-9 text-left">
+                        <h6><small>
+                            Cliente
+                            <br/>
+                            {{pedido.customer}}
+                        </small></h6>
+                    </div>
+                    <div class="col-3">
+                        <h6><small>
+                            Total
+                            <br/>
+                            {{pedido.getTotalOrder() | currency:'BRL':true:'3.2'}}
+                        </small></h6>
+                    </div>
+                    <div class="col-9 text-left">
+                        <h6><small>
+                            Vendedor
+                            <br/>
+                            NOME DO VENDEDOR
+                        </small></h6>
+                    </div>
+                    <div class="col-3">
+                        <h6><small>
+                            Margem %
+                            <br/>
+                            {{pedido.getMargin() | number:'1.2'}}
+                        </small></h6>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <button class="btn btn-outline-warning" (click)="voltar()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Voltar</button>
+                        <button class="btn btn-outline-primary" (click)="voltar()"><i class="fa fa-undo" aria-hidden="true"></i> Descartar</button>
+                        <button class="btn btn-outline-success" (click)="voltar()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Gravar</button>
+                    </div>
+                    <div class="col-12 margin-top-20">
+                        <h4 class="text-center text-primary">
+                            <small>Itens do Pedido</small>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row card card-block box">
+            <div class="col-12 div-scrool">
+                    <pre>
+                        <p>{{pedido.itens | json}}</p>
+                    </pre>
+            </div>
+            <div class="botton">
+                <button class="btn btn-circle btn-lg btn-outline-primary">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

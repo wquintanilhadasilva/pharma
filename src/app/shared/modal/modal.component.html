@@ -27,12 +27,12 @@
 
 <div
     (click)="onContainerClicked($event)" 
-    class="modal fade" tabindex="-1" 
+    class="modal fade container-fluid" tabindex="-1" 
     [ngClass]="{'in': visibleAnimate}"
-    [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0}">
+    [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': visibleAnimate ? 1 : 0, 'top': '100px'}">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="margin-top: 30px;">
         <h5>
           <ng-content select=".app-modal-header"></ng-content>
         </h5>
