@@ -27,7 +27,7 @@ export class PedidosService {
         io.productUnitCost = 5.00;
         io.quantidade = i + c;
         io.salesPrice = 10;
-        io.tax = 1;
+        io.tax = 1.5 * i + o.itens.length;
         io.totalItem = c;
         o.itens.push(io);
       }

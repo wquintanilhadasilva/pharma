@@ -30,7 +30,7 @@
 
 </div>
 
-<app-modal #modalAprovar>
+<app-dialog #modalAprovar [identificador]="'modalAprovar'">
   <div class="app-modal-header">
     Confirmar Aprovação
   </div>
@@ -42,9 +42,9 @@
     <button type="button" class="btn btn-secondary" (click)="fecharDialogo(modalAprovar)" data-dismiss="modal">Cancelar</button>
     <button type="button" class="btn btn-primary" (click)="confirmeAprovar(modalAprovar.item);" data-dismiss="modal">Confirmar</button>
   </div>
-</app-modal>
+</app-dialog>
 
-<app-modal #modalReprovar>
+<app-dialog #modalReprovar [identificador]="'modalReprovar'">
   <div class="app-modal-header">
     Confirmar Rejeição
   </div>
@@ -56,59 +56,4 @@
     <button type="button" class="btn btn-secondary" (click)="fecharDialogo(modalReprovar)" data-dismiss="modal">Cancelar</button>
     <button type="button" class="btn btn-primary" (click)="confirmeReprovar(modalReprovar.item);" data-dismiss="modal">Confirmar</button>
   </div>
-</app-modal>
-
-
-
-
-
-<!-- Modal Exclusão-->
-
-<!-- i class="fa fa-check fa-2x" aria-hidden="true" (click)="aprovar(pedido)" data-toggle="modal" data-target="#confirmarAprovacao"></i>
-<i class="fa fa-times fa-2x" aria-hidden="true"  data-toggle="modal" data-target="#confirmarExclusao"></i>
-<i class="fa fa-pencil fa-2x" aria-hidden="true" (click)="editar(pedido)"></i-->
-
-<!--div class="modal fade" id="confirmarExclusao" tabindex="-1" role="dialog" aria-labelledby="confirmarExclusaoTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmarExclusaoTitle">Confirmar Rejeição</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p class="lead text-center">Tem certeza que deseja
-          <mark><strong class=" text-danger text-primary">Rejeitar</strong></mark> esse pedido?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="pedidoSelecionado = null;" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="rejeitarPedido();pedidoSelecionado = null" data-dismiss="modal">Confirmar</button>
-      </div>
-    </div>
-  </div>
-</div-->
-
-
-
-<!-- Modal Aprovação -->
-<!--div class="modal fade" id="confirmarAprovacao" tabindex="-1" role="dialog" aria-labelledby="confirmarAprovacaoTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmarAprovacaoTitle">Confirmar Aprovação</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p class="lead text-center">Tem certeza que deseja
-          <mark><strong class=" text-success text-primary">Aprovar</strong></mark> esse pedido?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="pedidoSelecionado = null;" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="aprovarPedido();pedidoSelecionado = null;" data-dismiss="modal">Confirmar</button>
-      </div>
-    </div>
-  </div>
-</div -->
+</app-dialog>

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-//import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-modal',

@@ -14,6 +14,8 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
 
   pedido: Order;
 
+  itemSelecionado;
+
   subscricao: Subscription;
 
   constructor(
@@ -36,6 +38,16 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscricao.unsubscribe();
+  }
+
+  remover(p) {
+    console.log(p);
+    // TODO implementar a exlcusão do item
+  }
+
+  editar(item) {
+    console.log(item);
+    // TODO implementar a edição do item
   }
 
 }

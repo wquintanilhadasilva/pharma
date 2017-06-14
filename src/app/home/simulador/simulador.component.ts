@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { DialogComponent } from './../../shared/dialog/dialog.component';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Order } from './../../domain/Order';
@@ -15,11 +16,10 @@ import { ModalComponent } from './../../shared/modal/modal.component';
 })
 export class SimuladorComponent implements OnInit {
 
-  @ViewChild('modalAprovar') modalAprovar: ModalComponent;
-  @ViewChild('modalReprovar') modalReprovar: ModalComponent;
+  @ViewChild('modalAprovar') modalAprovar: DialogComponent;
+  @ViewChild('modalReprovar') modalReprovar: DialogComponent;
 
   constructor(private pedidosService: PedidosService, private router: Router) {
-    console.log('construtor');
   }
 
   ngOnInit() {
@@ -32,7 +32,7 @@ export class SimuladorComponent implements OnInit {
   confirmeAprovar(pedido) {
     console.log(pedido);
     console.log('aprovado!');
-     this.fecharDialogo(this.modalAprovar);
+    this.fecharDialogo(this.modalAprovar);
   }
 
   onRejeitarPedido(pedido) {
@@ -50,7 +50,7 @@ export class SimuladorComponent implements OnInit {
     this.router.navigate(['/home/simulador', pedido.number, 'editar']);
   }
 
-  fecharDialogo(dlg: ModalComponent) {
+  fecharDialogo(dlg: DialogComponent) {
     if (dlg != null) {
       dlg.hide();
     }

@@ -1,35 +1,43 @@
 
-import { 
-  Component, OnInit, Input, Output, OnChanges, EventEmitter, 
-  trigger, state, style, animate, transition } from '@angular/core';
+import {
+  Component, OnInit, ElementRef, ViewChild, Input
+} from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css'],
-  animations: [
-    trigger('dialog', [
-      transition('void => *', [
-        style({ transform: 'scale3d(.3, .3, .3)' }),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({ transform: 'scale3d(.0, .0, .0)' }))
-      ])
-    ])
-  ]
+  styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  @Input() closable = true;
-  @Input() visible: boolean;
-  @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @ViewChild('btnShowDialog') btnShowDialog: ElementRef;
+
+  public item: any;
+
+  @Input() identificador: string;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
-  close() {
-    this.visible = false;
-    this.visibleChange.emit(this.visible);
+  public show(item): void {
+    if (this.identificador === null || this.identificador === '') {
+      throw new Error('Necessário informar o id do componente!');
+    }
+    this.item = item;
+    this.btnShowDialog.nativeElement.click();
+    /*setTimeout(() => {
+    }, 100); */
   }
+
+  public hide(): void {
+    this.item = null;
+  }
+
+  public onContainerClicked(event: MouseEvent): void {
+    if ((<HTMLElement>event.target).classList.contains('modal')) {
+      this.hide();
+    }
+  }
+
 }
