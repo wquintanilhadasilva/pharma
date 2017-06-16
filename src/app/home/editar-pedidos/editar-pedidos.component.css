@@ -76,3 +76,17 @@
     font-size: x-small;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+/*
+.disableForm {
+    pointer-events: none;
+    opacity: 0.4;
+    background-color: gray;
+    overflow: hidden;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 98;*/
+    /*height: 650px !important;*//*
+}*/

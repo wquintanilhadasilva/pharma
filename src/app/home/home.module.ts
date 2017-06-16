@@ -17,6 +17,7 @@ import { PedidosService } from './services/pedidos.service';
 import { EditarPedidosComponent } from './editar-pedidos/editar-pedidos.component';
 
 import { PedidosResolver } from './guards/pedidos-resolver';
+import { EditarItemPedidoComponent } from './editar-item-pedido/editar-item-pedido.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { PedidosResolver } from './guards/pedidos-resolver';
     SimuladorComponent,
     PainelComponent,
     ListaPedidosComponent,
-    EditarPedidosComponent
+    EditarPedidosComponent,
+    EditarItemPedidoComponent
   ],
   exports: [
     HomeRoutingModule

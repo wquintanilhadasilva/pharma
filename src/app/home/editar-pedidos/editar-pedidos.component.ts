@@ -12,11 +12,17 @@ import { Order } from './../../domain/Order';
 })
 export class EditarPedidosComponent implements OnInit, OnDestroy {
 
+  styleView = '{visibility: (showEditar ? \'hidden\' : \'\'), height: (showEditar ? \'80px\' : \'100%\')}';
+  // {visibility: (showEditar ? 'hidden' : '', height: (showEditar ? '80px' : '100%')}
   pedido: Order;
 
   itemSelecionado;
 
   subscricao: Subscription;
+
+  showEditar = false;
+
+  cssDisabled = 'pointer-events:none;';
 
   constructor(
     private activateRouted: ActivatedRoute,
@@ -46,8 +52,14 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
   }
 
   editar(item) {
-    console.log(item);
+    this.itemSelecionado = item;
+    this.showEditar = true;
     // TODO implementar a edição do item
+  }
+
+  closeEditar(value) {
+    this.showEditar = false;
+    this.itemSelecionado = null;
   }
 
 }
