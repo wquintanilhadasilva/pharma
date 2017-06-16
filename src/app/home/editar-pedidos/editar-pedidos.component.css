@@ -71,3 +71,8 @@
     color: red;
     margin: 7px;
 }
+
+.fontSmall {
+    font-size: x-small;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

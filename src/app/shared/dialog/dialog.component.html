@@ -1,4 +1,4 @@
-<div (click)="onContainerClicked($event)">
+<div *ngIf="exibir" (click)="onContainerClicked($event)">
   <button #btnShowDialog style="visibility: hidden;" data-toggle="modal" [attr.data-target]="'#' + identificador"></button>
   <div class="modal fade" id={{identificador}} tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">

@@ -12,9 +12,9 @@ export class DialogComponent implements OnInit {
 
   @ViewChild('btnShowDialog') btnShowDialog: ElementRef;
 
-  public item: any;
-
   @Input() identificador: string;
+  public item: any;
+  public exibir = false;
 
   constructor() { }
 
@@ -25,13 +25,15 @@ export class DialogComponent implements OnInit {
       throw new Error('Necessário informar o id do componente!');
     }
     this.item = item;
-    this.btnShowDialog.nativeElement.click();
-    /*setTimeout(() => {
-    }, 100); */
+    this.exibir = true;
+    setTimeout(() => {
+      this.btnShowDialog.nativeElement.click();
+    }, 100);
   }
 
   public hide(): void {
     this.item = null;
+    this.exibir = false;
   }
 
   public onContainerClicked(event: MouseEvent): void {
