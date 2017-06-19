@@ -1,7 +1,5 @@
 
-import {
-  Component, OnInit, ElementRef, ViewChild, Input
-} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
@@ -18,7 +16,8 @@ export class DialogComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   public show(item): void {
     if (this.identificador === null || this.identificador === '') {

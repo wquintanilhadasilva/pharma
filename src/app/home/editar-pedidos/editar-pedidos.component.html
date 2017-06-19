@@ -1,12 +1,11 @@
-
-
-    <div class="row text-center text-primary" [ngStyle]="{visibility: (showEditar ? 'hidden' : ''), height: (showEditar ? '80px' : '100%')}">
+<div>
+    <div class="row text-center text-primary">
         <div class="col-12">
             <h4>Editar Pedido</h4>
         </div>
     </div>
     <div  class="box">
-        <div [ngStyle]="{visibility: (showEditar ? 'hidden' : ''), height: (showEditar ? '80px' : '100%')}"> <!--[ngClass]="{ disableForm: showEditar }" -->
+        <div >
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
@@ -155,7 +154,7 @@
                                     <td class="td-order-item-action text-center">
                                         <div class="row">
                                             <div class="col-12">
-                                                <i class="fa fa-times fa-1x" (click)="itemSelecionado=p" style="padding: 10px;" data-toggle="modal" data-target=".modal"><br><span class="fontSmall">Excluir</span></i>
+                                                <i class="fa fa-times fa-1x" (click)="itemSelecionado=p" style="padding: 10px;" data-toggle="modal" data-target="#modalExcluir"><br><span class="fontSmall">Excluir</span></i>
                                                 <i class="fa fa-pencil fa-1x" (click)="editar(p)" style="padding: 10px;"><br><span class="fontSmall">Editar</span></i>
                                             </div>
                                         </div>
@@ -166,13 +165,13 @@
                     </div>
                 </div>
             </div>
+            <app-editar-item-pedido #editarItem (editClose)="closeEditar($event)">
+            </app-editar-item-pedido>
         </div>
-        <app-editar-item-pedido [item]="itemSelecionado" *ngIf="showEditar" (editClose)="closeEditar($event)">
-        </app-editar-item-pedido>
     </div>
 
 <!-- MODAL CONFIRM -->
-<div class="modal fade" id=#confirmModal tabindex="-1" role="dialog" aria-labelledby="titulo" aria-hidden="true">
+<div class="modal fade" id="modalExcluir" tabindex="-1" role="dialog" aria-labelledby="titulo" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

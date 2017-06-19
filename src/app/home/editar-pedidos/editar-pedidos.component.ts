@@ -1,8 +1,9 @@
-import { FaturamentoService } from './../services/faturamento.service';
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
+import { FaturamentoService } from './../services/faturamento.service';
+import { EditarItemPedidoComponent } from './../editar-item-pedido/editar-item-pedido.component';
 import { Order } from './../../domain/Order';
 
 @Component({
@@ -12,17 +13,14 @@ import { Order } from './../../domain/Order';
 })
 export class EditarPedidosComponent implements OnInit, OnDestroy {
 
-  styleView = '{visibility: (showEditar ? \'hidden\' : \'\'), height: (showEditar ? \'80px\' : \'100%\')}';
-  // {visibility: (showEditar ? 'hidden' : '', height: (showEditar ? '80px' : '100%')}
   pedido: Order;
-
   itemSelecionado;
-
   subscricao: Subscription;
 
-  showEditar = false;
 
   cssDisabled = 'pointer-events:none;';
+
+  @ViewChild('editarItem') editarItem: EditarItemPedidoComponent;
 
   constructor(
     private activateRouted: ActivatedRoute,
@@ -53,12 +51,11 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
 
   editar(item) {
     this.itemSelecionado = item;
-    this.showEditar = true;
-    // TODO implementar a edição do item
+    console.log(this.editarItem);
+    this.editarItem.show(item);
   }
 
   closeEditar(value) {
-    this.showEditar = false;
     this.itemSelecionado = null;
   }
 

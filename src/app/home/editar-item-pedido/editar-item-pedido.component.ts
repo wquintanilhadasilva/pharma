@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-editar-item-pedido',
@@ -9,13 +9,18 @@ export class EditarItemPedidoComponent implements OnInit {
 
   @Output() editClose = new EventEmitter();
 
-  @Input() item: any;
+  @ViewChild('btnShowDialog') btnShow: ElementRef;
+
+  item: any;
 
   constructor() { }
 
   ngOnInit() {
-    console.log('xxx');
-    console.log(this.item);
+  }
+
+  show(it) {
+    this.item = it;
+    this.btnShow.nativeElement.click();
   }
 
   onEditClose() {
