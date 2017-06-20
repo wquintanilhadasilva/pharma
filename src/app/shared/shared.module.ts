@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';
 import { ModalComponent } from './modal/modal.component';
 import { DialogComponent } from './dialog/dialog.component';
+import { MarginColorPipe } from './pipes/margin-color.pipe';
 
 @NgModule({
   imports: [
@@ -12,12 +13,14 @@ import { DialogComponent } from './dialog/dialog.component';
   declarations: [
     PaginaNaoEncontradaComponent,
     ModalComponent,
-    DialogComponent
+    DialogComponent,
+    MarginColorPipe
     ],
   exports: [
     PaginaNaoEncontradaComponent,
     ModalComponent,
-    DialogComponent
+    DialogComponent,
+    MarginColorPipe
   ]
 })
 export class SharedModule { }

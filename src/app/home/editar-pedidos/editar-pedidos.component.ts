@@ -1,3 +1,5 @@
+import { PedidosService } from './../services/pedidos.service';
+import { ItemOrder } from './../../domain/ItemOrder';
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -17,15 +19,13 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
   itemSelecionado;
   subscricao: Subscription;
 
-
-  cssDisabled = 'pointer-events:none;';
-
   @ViewChild('editarItem') editarItem: EditarItemPedidoComponent;
 
   constructor(
     private activateRouted: ActivatedRoute,
     private route: Router,
-    private faturamentoService: FaturamentoService
+    private faturamentoService: FaturamentoService,
+    private pedidosService: PedidosService
   ) { }
 
   ngOnInit() {
@@ -51,12 +51,30 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
 
   editar(item) {
     this.itemSelecionado = item;
-    console.log(this.editarItem);
     this.editarItem.show(item);
   }
 
   closeEditar(value) {
+    // se houve mudanças, atualiza o valor na lista
+    if (value.confirmado) {
+      this.mudarDadosItem(value.item);
+    }
     this.itemSelecionado = null;
+  }
+
+  descartar() {
+    // Recupera o pedido original do service
+    this.pedido = this.pedidosService.getPedido(this.pedido.number);
+  }
+
+  gravar () {
+    // TODO gravar o pedido atualizado no service
+    this.pedidosService.gravarPedido(this.pedido);
+    this.pedido = this.pedidosService.getPedido(this.pedido.number);
+  }
+
+  private mudarDadosItem(novoItem: ItemOrder) {
+    Object.assign(this.itemSelecionado, novoItem);
   }
 
 }

@@ -1,3 +1,4 @@
+import { ItemOrder } from './../../domain/ItemOrder';
 import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -12,19 +13,37 @@ export class EditarItemPedidoComponent implements OnInit {
   @ViewChild('btnShowDialog') btnShow: ElementRef;
 
   item: any;
+  itemOriginal: any;
 
   constructor() { }
 
   ngOnInit() {
+    if (this.item == null) {
+      this.item = new ItemOrder();
+    }
   }
 
   show(it) {
-    this.item = it;
+    this.itemOriginal = it;
+    this.cloneItem();
     this.btnShow.nativeElement.click();
   }
 
-  onEditClose() {
-    this.editClose.emit({});
+  closeCancel() {
+    // reestabelece o objeto original sem as mudanças possivelmente realizadas.
+    this.emitCloseEvent(false, this.itemOriginal);
+  }
+
+  closeConfirm() {
+    this.emitCloseEvent(true, this.item);
+  }
+
+  private cloneItem() {
+    this.item =  Object.assign(new ItemOrder(), this.itemOriginal);
+  }
+
+  private emitCloseEvent(value, itemPedido) {
+    this.editClose.emit({confirmado: value, item: itemPedido});
   }
 
 }

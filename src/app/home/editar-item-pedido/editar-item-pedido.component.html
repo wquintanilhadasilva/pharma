@@ -13,31 +13,56 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          
+          <div class="col-6">
+            <label for="tax" class="control-label">Margem Global</label>
+            <input [value]="item.tax | currency:'BRL':true" disabled type="text" class="form-control" id="tax">
+          </div>
+          <div class="col-6">
+            <label for="productUnitCost" class="control-label">Margem do Pedido</label>
+            <input [value]="item.productUnitCost | currency:'BRL':true" disabled type="text" class="form-control" id="productUnitCost">
+          </div>
         </div>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
-        <h1>TESTE</h1>
+        <hr>
+        <div class="row">
+          <div class="col-12">
+            <label for="productName" class="control-label">Produto</label>
+            <input [value]="item.productName" disabled type="text" class="form-control" id="productName">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="tax" class="control-label">Imposto</label>
+            <input [value]="item.tax | currency:'BRL':true" disabled type="text" class="form-control" id="tax">
+          </div>
+          <div class="col-6">
+            <label for="productUnitCost" class="control-label">Custo unitário</label>
+            <input [value]="item.productUnitCost | currency:'BRL':true" disabled type="text" class="form-control" id="productUnitCost">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="margem" class="control-label">Margem</label>
+            <input [value]="item.getMarginItem() | currency:'BRL':true | margincolor" disabled type="text" class="form-control" id="margem">
+          </div>
+           <div class="col-6">
+            <label for="valorTotal" class="control-label">Valor total</label>
+            <input [value]="item.getTotalValue() | currency:'BRL':true" disabled type="text" class="form-control" id="valorTotal">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label for="quantidade" class="control-label">Quantidade</label>
+            <input [(ngModel)]="item.quantidade" type="number" data-bind="value:replyNumber" class="form-control" id="quantidade">
+          </div>
+          <div class="col-6">
+            <label for="salesPrice" class="control-label">Preço de venda</label>
+            <input [(ngModel)]="item.salesPrice" type="number" data-bind="value:replyNumber" class="form-control" id="salesPrice">
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+        <button type="button" (click)="closeCancel()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" (click)="closeConfirm()" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
       </div>
     </div>
   </div>

@@ -46,4 +46,17 @@ export class PedidosService {
     return this.getPedidos().find((p: Order)  => p.number === id);
   }
 
+  public gravarPedido(pedido: Order) {
+
+    let idx = this.listaDePedidos.findIndex((x: Order) => x.number === pedido.number);
+    console.log(idx);
+    this.listaDePedidos.splice(idx, 1);
+    this.listaDePedidos.push(pedido);
+    /*
+    this.listaDePedidos[idx].itens = pedido.itens;
+    let x = this.getPedido(pedido.number);
+    console.log(x);
+    */
+  }
+
 }
