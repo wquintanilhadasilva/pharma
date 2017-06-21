@@ -23,18 +23,20 @@ export class EditarItemPedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.item == null) {
-      this.item = new ItemOrder();
-    }
-    if (this.pedido == null) {
-      this.pedido = new Order();
-    }
+    this.inicializa();
+    console.log('init');
   }
 
   show(it: ItemOrder, ped: Order) {
     this.itemOriginal = it;
     this.pedido = ped;
     this.cloneItem();
+    this.btnShow.nativeElement.click();
+  }
+
+  showNewItem(ped: Order) {
+    this.inicializa();
+    this.pedido = ped;
     this.btnShow.nativeElement.click();
   }
 
@@ -53,6 +55,12 @@ export class EditarItemPedidoComponent implements OnInit {
 
   private emitCloseEvent(value, itemPedido) {
     this.editClose.emit({confirmado: value, item: itemPedido});
+  }
+
+  private inicializa() {
+      this.item = new ItemOrder();
+      this.pedido = new Order();
+      this.itemOriginal = new ItemOrder();
   }
 
 }
