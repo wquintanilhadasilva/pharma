@@ -1,5 +1,8 @@
+import { Order } from './../../domain/Order';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+
 import { ItemOrder } from './../../domain/ItemOrder';
-import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
+import { FaturamentoService } from './../services/faturamento.service';
 
 @Component({
   selector: 'app-editar-item-pedido',
@@ -12,19 +15,25 @@ export class EditarItemPedidoComponent implements OnInit {
 
   @ViewChild('btnShowDialog') btnShow: ElementRef;
 
-  item: any;
-  itemOriginal: any;
+  item: ItemOrder;
+  itemOriginal: ItemOrder;
+  pedido: Order;
 
-  constructor() { }
+  constructor(private faturamentoService: FaturamentoService) {
+  }
 
   ngOnInit() {
     if (this.item == null) {
       this.item = new ItemOrder();
     }
+    if (this.pedido == null) {
+      this.pedido = new Order();
+    }
   }
 
-  show(it) {
+  show(it: ItemOrder, ped: Order) {
     this.itemOriginal = it;
+    this.pedido = ped;
     this.cloneItem();
     this.btnShow.nativeElement.click();
   }

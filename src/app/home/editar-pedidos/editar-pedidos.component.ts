@@ -51,7 +51,7 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
 
   editar(item) {
     this.itemSelecionado = item;
-    this.editarItem.show(item);
+    this.editarItem.show(item, this.pedido);
   }
 
   closeEditar(value) {

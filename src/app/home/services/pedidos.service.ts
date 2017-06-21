@@ -8,10 +8,8 @@ export class PedidosService {
 
   public listaDePedidos: any[] = [];
 
-  constructor() { }
-
-  getPedidos(): any[] {
-
+  constructor() {
+    console.log('inicio service');
     this.listaDePedidos = [];
 
     for (let i = 1; i <= 30; i++) {
@@ -33,9 +31,10 @@ export class PedidosService {
       }
       this.listaDePedidos.push(o);
     }
+   }
 
+  getPedidos(): any[] {
     return this.listaDePedidos;
-
   }
 
   public obtemTotalDePedidos(): number {
@@ -50,13 +49,11 @@ export class PedidosService {
 
     let idx = this.listaDePedidos.findIndex((x: Order) => x.number === pedido.number);
     console.log(idx);
-    this.listaDePedidos.splice(idx, 1);
-    this.listaDePedidos.push(pedido);
-    /*
-    this.listaDePedidos[idx].itens = pedido.itens;
-    let x = this.getPedido(pedido.number);
-    console.log(x);
-    */
+    // this.listaDePedidos.splice(idx, 1);
+    // this.listaDePedidos.push(pedido);
+
+    this.listaDePedidos[idx] = pedido;
+
   }
 
 }

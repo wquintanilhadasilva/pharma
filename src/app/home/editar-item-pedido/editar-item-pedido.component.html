@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="titulo">
-          Editar Item do Pedido
+          Editar Item do Pedido: <mark>{{pedido.number}}</mark>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -15,11 +15,11 @@
         <div class="row">
           <div class="col-6">
             <label for="tax" class="control-label">Margem Global</label>
-            <input [value]="item.tax | currency:'BRL':true" disabled type="text" class="form-control" id="tax">
+            <input [value]="faturamentoService.obtemMargemGlobal() | number:'1.2'" disabled type="text" class="form-control" id="tax">
           </div>
           <div class="col-6">
             <label for="productUnitCost" class="control-label">Margem do Pedido</label>
-            <input [value]="item.productUnitCost | currency:'BRL':true" disabled type="text" class="form-control" id="productUnitCost">
+            <input [value]="pedido.getMargin() | number:'1.2'" disabled type="text" class="form-control" id="productUnitCost">
           </div>
         </div>
         <hr>
@@ -42,7 +42,7 @@
         <div class="row">
           <div class="col-6">
             <label for="margem" class="control-label">Margem</label>
-            <input [value]="item.getMarginItem() | currency:'BRL':true | margincolor" disabled type="text" class="form-control" id="margem">
+            <input [value]="item.getMarginItem() | number:'1.2' | margincolor" disabled type="text" class="form-control" id="margem">
           </div>
            <div class="col-6">
             <label for="valorTotal" class="control-label">Valor total</label>
