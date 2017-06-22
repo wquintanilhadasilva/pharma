@@ -54,10 +54,19 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
     this.editarItem.show(item, this.pedido);
   }
 
+  novoItem() {
+     this.editarItem.show(null, this.pedido);
+  }
+
   closeEditar(value) {
     // se houve mudanças, atualiza o valor na lista
     if (value.confirmado) {
-      this.mudarDadosItem(value.item);
+      if (!value.novoItem) {
+        this.mudarDadosItem(value.item);
+      }else {
+        // Novo item, add ao pedido
+        this.pedido.addItem(value.item);
+      }
     }
     this.itemSelecionado = null;
   }

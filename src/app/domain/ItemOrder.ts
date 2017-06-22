@@ -5,7 +5,7 @@
  */
 export class ItemOrder {
     public id;
-    public productName;
+    public productName = '';
     public productUnitCost = 0;
     public quantidade = 0;
     public totalItem = 0;
@@ -13,7 +13,7 @@ export class ItemOrder {
     public tax = 0;
 
     getMarginItem(): number {
-        return (this.getTotalValue() - (this.tax + this.getTotalCost())) / this.getTotalValue();
+        return  this.getTotalValue() === 0 ? 0 : (this.getTotalValue() - (this.tax + this.getTotalCost())) / this.getTotalValue();
     }
 
     getTotalValue(): number {

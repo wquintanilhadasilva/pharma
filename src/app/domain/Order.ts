@@ -21,7 +21,7 @@ export class Order {
                 marginSum += i.getMarginItem();
                 totalItems += i.quantidade;
             });
-            return marginSum / totalItems;
+            return totalItems === 0 ? 0 : marginSum / totalItems;
         }catch (e) {
             console.log(e);
             return 0;
@@ -40,5 +40,9 @@ export class Order {
             }
         );
         return total;
+    }
+
+    addItem(it){
+        this.itens.push(it);
     }
 }

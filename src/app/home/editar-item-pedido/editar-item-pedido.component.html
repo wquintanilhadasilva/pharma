@@ -1,11 +1,11 @@
 <button #btnShowDialog style="visibility: hidden;" data-toggle="modal" data-target="#itemPedido"></button>
 
-<div class="modal fade" id="itemPedido" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="titulo" aria-hidden="true">
+<div *ngIf="exibir" class="modal fade" id="itemPedido" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="titulo" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="titulo">
-          Editar Item do Pedido: <mark>{{pedido.number}}</mark>
+          Editar Item - Nº Pedido: <mark>{{pedido.number}}</mark>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -26,7 +26,16 @@
         <div class="row">
           <div class="col-12">
             <label for="productName" class="control-label">Produto</label>
-            <input [value]="item.productName" disabled type="text" class="form-control" id="productName">
+            <input *ngIf="!novoItem" [value]="item.productName" disabled type="text" class="form-control" id="productName">
+            <input *ngIf="novoItem" (selectItem)="selectItem($event)" 
+                    autofocus style="color: orange;" 
+                    placeholder="Entre com as iniciais do produto" 
+                    id="typeahead-format" 
+                    type="text" 
+                    class="form-control" 
+                    [(ngModel)]="item.productName" 
+                    [ngbTypeahead]="search" 
+                    [resultFormatter]="formatter"/>
           </div>
         </div>
         <div class="row">
