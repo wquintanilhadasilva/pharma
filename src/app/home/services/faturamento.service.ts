@@ -13,7 +13,7 @@ export class FaturamentoService {
     FaturamentoService.movimento = new Faturamento();
   }
 
-  getFaturamento(): Faturamento {
+  public getFaturamento(): Faturamento {
 
     FaturamentoService.movimento.referencia = this. obtemReferenciaAtual();
     FaturamentoService.movimento.faturamentoGlobal = this.obtemFaturamentoTotal();
