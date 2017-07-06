@@ -15,7 +15,7 @@ import { Order } from './../../domain/Order';
 })
 export class EditarPedidosComponent implements OnInit, OnDestroy {
 
-  pedido: Order;
+  pedido: any;
   itemSelecionado;
   subscricao: Subscription;
 
@@ -73,13 +73,15 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
 
   descartar() {
     // Recupera o pedido original do service
-    this.pedido = this.pedidosService.getPedido(this.pedido.number);
+    this.pedidosService.getPedido(this.pedido.number).subscribe(data => this.pedido = data);
+    // this.pedido = this.pedidosService.getPedido(this.pedido.number);
   }
 
   gravar () {
     // TODO gravar o pedido atualizado no service
     this.pedidosService.gravarPedido(this.pedido);
-    this.pedido = this.pedidosService.getPedido(this.pedido.number);
+    this.pedidosService.getPedido(this.pedido.number).subscribe(data => this.pedido = data);
+    // this.pedido = this.pedidosService.getPedido(this.pedido.number);
   }
 
   private mudarDadosItem(novoItem: ItemOrder) {

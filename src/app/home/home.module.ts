@@ -1,6 +1,7 @@
+import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { SharedModule } from './../shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -25,7 +26,8 @@ import { EditarItemPedidoComponent } from './editar-item-pedido/editar-item-pedi
     FormsModule,
     HomeRoutingModule,
     NgbModule,
-    SharedModule
+    SharedModule,
+    HttpModule
   ],
   declarations: [
     HomeComponent,

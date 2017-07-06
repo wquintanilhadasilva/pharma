@@ -25,21 +25,21 @@ export class FaturamentoService {
 
   public obtemMargemGlobal() {
     let margin = 0;
-    this.pedidosService.getPedidos().forEach(
+    /*this.pedidosService.getPedidos().forEach(
       (p: Order) => {
         margin += p.getMargin();
       }
-    );
+    );*/
     return margin;
   }
 
   public obtemFaturamentoTotal(): number {
     let total = 0;
-    this.pedidosService.getPedidos().forEach(
+    /*this.pedidosService.getPedidos().forEach(
       (p: Order) => {
         total += p.getTotalOrder();
       }
-    );
+    );*/
     return total;
   }
 

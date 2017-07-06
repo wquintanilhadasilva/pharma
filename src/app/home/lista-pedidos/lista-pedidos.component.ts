@@ -1,3 +1,4 @@
+import { Order } from './../../domain/Order';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { PedidosService } from './../services/pedidos.service';
@@ -13,9 +14,18 @@ export class ListaPedidosComponent implements OnInit {
   @Output() reprovarPedido = new EventEmitter();
   @Output() editarPedido = new EventEmitter();
 
-  constructor(public pedidosService: PedidosService) {}
+  pedidos: Order[];
 
-  ngOnInit() {}
+  constructor(private pedidosService: PedidosService) {}
+
+  ngOnInit() {
+    this.pedidosService.getPedidos().subscribe(data => {
+      console.log('retorno server');
+      console.log(data);
+      this.pedidos = data;
+      console.log(this.pedidos);
+    });
+  }
 
   aprovar(pedido) {
     this.aprovarPedido.emit(pedido);
