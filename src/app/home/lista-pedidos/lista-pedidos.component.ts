@@ -13,7 +13,7 @@ export class ListaPedidosComponent implements OnInit {
   @Output() reprovarPedido = new EventEmitter();
   @Output() editarPedido = new EventEmitter();
 
-  constructor(private pedidosService: PedidosService) {}
+  constructor(public pedidosService: PedidosService) {}
 
   ngOnInit() {}
 

@@ -24,7 +24,7 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
   constructor(
     private activateRouted: ActivatedRoute,
     private route: Router,
-    private faturamentoService: FaturamentoService,
+    public faturamentoService: FaturamentoService,
     private pedidosService: PedidosService
   ) { }
 
