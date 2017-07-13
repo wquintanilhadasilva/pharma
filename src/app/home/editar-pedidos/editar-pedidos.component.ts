@@ -15,7 +15,7 @@ import { Order } from './../../domain/Order';
 })
 export class EditarPedidosComponent implements OnInit, OnDestroy {
 
-  pedido: any;
+  pedido;
   itemSelecionado;
   subscricao: Subscription;
 
@@ -31,7 +31,9 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscricao = this.activateRouted.data.subscribe(
       (info: {pedido: Order}) => {
+        console.log(info);
         this.pedido = info.pedido;
+        console.log(this.pedido);
       }
     );
   }
@@ -65,7 +67,7 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
         this.mudarDadosItem(value.item);
       }else {
         // Novo item, add ao pedido
-        this.pedido.addItem(value.item);
+        this.pedido.itens.push(value.item);
       }
     }
     this.itemSelecionado = null;
@@ -84,7 +86,7 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
     // this.pedido = this.pedidosService.getPedido(this.pedido.number);
   }
 
-  private mudarDadosItem(novoItem: ItemOrder) {
+  private mudarDadosItem(novoItem) {
     Object.assign(this.itemSelecionado, novoItem);
   }
 

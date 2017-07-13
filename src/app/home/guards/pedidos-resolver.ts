@@ -14,7 +14,7 @@ export class PedidosResolver implements Resolve<any> {
     constructor(private pedidosService: PedidosService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-        let id = route.params['id'];
+        const id = route.params['id'];
         return this.pedidosService.getPedido(id);
     }
 

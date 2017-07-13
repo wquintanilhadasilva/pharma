@@ -45,7 +45,7 @@ export class SimuladorComponent implements OnInit {
     this.fecharDialogo(this.modalReprovar);
   }
 
-  onEditarPedido(pedido: Order) {
+  onEditarPedido(pedido) {
     // router para o editor do pedido
     this.router.navigate(['/home/simulador', pedido.number, 'editar']);
   }

@@ -14,16 +14,13 @@ export class ListaPedidosComponent implements OnInit {
   @Output() reprovarPedido = new EventEmitter();
   @Output() editarPedido = new EventEmitter();
 
-  pedidos: Order[];
+  pedidos:  any[];
 
   constructor(private pedidosService: PedidosService) {}
 
   ngOnInit() {
     this.pedidosService.getPedidos().subscribe(data => {
-      console.log('retorno server');
-      console.log(data);
       this.pedidos = data;
-      console.log(this.pedidos);
     });
   }
 

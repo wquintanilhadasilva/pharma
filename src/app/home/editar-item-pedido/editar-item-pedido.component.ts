@@ -29,9 +29,9 @@ export class EditarItemPedidoComponent implements OnInit {
 
   @ViewChild('btnShowDialog') btnShow: ElementRef;
 
-  item: ItemOrder;
-  itemOriginal: ItemOrder;
-  pedido: Order;
+  item;
+  itemOriginal;
+  pedido;
 
   novoItem = false;
 
@@ -55,7 +55,7 @@ export class EditarItemPedidoComponent implements OnInit {
     console.log('init');
   }
 
-  show(it: ItemOrder, ped: Order) {
+  show(it, ped) {
     this.exibir = true;
     if (it === null) {
       this.inicializa();
@@ -86,7 +86,7 @@ export class EditarItemPedidoComponent implements OnInit {
   }
 
   private cloneItem() {
-    this.item =  Object.assign(new ItemOrder(), this.itemOriginal);
+    this.item =  Object.assign(new Object(), this.itemOriginal);
   }
 
   private emitCloseEvent(value, itemPedido) {
@@ -95,9 +95,35 @@ export class EditarItemPedidoComponent implements OnInit {
   }
 
   private inicializa() {
-      this.item = new ItemOrder();
-      this.pedido = new Order();
-      this.itemOriginal = new ItemOrder();
+      this.item = new Object();
+      this.item.productName = '';
+      this.item.quantidade = 0;
+      this.item.salesPrice = 0;
+      this.item.totalItem = 0;
+      this.item.productUnitCost = 0;
+      this.item.totalCost = 0;
+      this.item.tax = 0;
+      this.item.margin = 0;
+
+      this.pedido = new Object();
+      this.pedido.number = 0;
+      this.pedido.date = new Date();
+      this.pedido.customer = '';
+      this.pedido.status = 'Pendente';
+      this.pedido.itens = [];
+      this.pedido.margin = 0;
+      this.pedido.totalOrder = 0;
+      this.pedido.qtdeItens = 0;
+
+      this.itemOriginal = new Object();
+      this.itemOriginal.productName = '';
+      this.itemOriginal.quantidade = 0;
+      this.itemOriginal.salesPrice = 0;
+      this.itemOriginal.totalItem = 0;
+      this.itemOriginal.productUnitCost = 0;
+      this.itemOriginal.totalCost = 0;
+      this.itemOriginal.tax = 0;
+      this.itemOriginal.margin = 0;
   }
 
 }

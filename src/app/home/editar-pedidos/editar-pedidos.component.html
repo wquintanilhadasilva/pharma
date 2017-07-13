@@ -59,7 +59,7 @@
                                 <h6><small>
                                     Total
                                     <br/>
-                                    {{pedido.getTotalOrder() | currency:'BRL':true:'3.2'}}
+                                    {{pedido.totalOrder | currency:'BRL':true:'3.2'}}
                                 </small></h6>
                             </div>
                             <div class="col-9 text-left">
@@ -73,7 +73,7 @@
                                 <h6><small>
                                     Margem %
                                     <br/>
-                                    <mark>{{pedido.getMargin() | number:'1.2'}}</mark>
+                                    <mark>{{pedido.margin | number:'1.2'}}</mark>
                                 </small></h6>
                             </div>
                         </div>
@@ -140,12 +140,11 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <span style="font-weight: bold;">Valor total: </span>{{p.getTotalValue()
-                                                        | currency:'BRL':true }}
+                                                        <span style="font-weight: bold;">Valor total: </span>{{p.totalItem | currency:'BRL':true }}
                                                     </div>
                                                     <div class="col-6">
                                                         <span style="font-weight: bold;">Margem: </span>
-                                                        <mark>{{p.getMarginItem() | number:'1.2'}}</mark>
+                                                        <mark>{{p.margin | number:'1.2'}}</mark>
                                                     </div>
                                                 </div>
                                             </div>

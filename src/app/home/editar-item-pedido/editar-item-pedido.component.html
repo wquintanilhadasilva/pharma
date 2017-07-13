@@ -19,7 +19,7 @@
           </div>
           <div class="col-6">
             <label for="productUnitCost" class="control-label">Margem do Pedido</label>
-            <input [value]="pedido.getMargin() | number:'1.2'" disabled type="text" class="form-control" id="productUnitCost">
+            <input [value]="pedido.margin | number:'1.2'" disabled type="text" class="form-control" id="productUnitCost">
           </div>
         </div>
         <hr>
@@ -52,11 +52,11 @@
         <div class="row">
           <div class="col-6">
             <label for="margem" class="control-label">Margem</label>
-            <input [value]="item.getMarginItem() | number:'1.2' | margincolor" disabled type="text" class="form-control" id="margem">
+            <input [value]="item.margin | number:'1.2' | margincolor" disabled type="text" class="form-control" id="margem">
           </div>
            <div class="col-6">
             <label for="valorTotal" class="control-label">Valor total</label>
-            <input [value]="item.getTotalValue() | currency:'BRL':true" disabled type="text" class="form-control" id="valorTotal">
+            <input [value]="item.totalItem | currency:'BRL':true" disabled type="text" class="form-control" id="valorTotal">
           </div>
         </div>
         <div class="row">

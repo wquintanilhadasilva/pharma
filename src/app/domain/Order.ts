@@ -42,7 +42,7 @@ export class Order {
         return total;
     }
 
-    addItem(it){
+    addItem(it) {
         this.itens.push(it);
     }
 }

@@ -62,7 +62,7 @@ export class PedidosService implements OnInit {
   public getPedido(id: string) {
 
     // return this.getPedidos().find((p: Order)  => p.number === id);
-    return this.http.get('http://localhost:54536/api/pedidos/' + id, this.getOptions()).map(response => response);
+    return this.http.get('http://localhost:54536/api/pedidos/' + id, this.getOptions()).map(response => response.json());
   }
 
   public gravarPedido(pedido: Order) {
