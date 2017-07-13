@@ -95,15 +95,9 @@ export class EditarItemPedidoComponent implements OnInit {
   }
 
   private inicializa() {
-      this.item = new Object();
-      this.item.productName = '';
-      this.item.quantidade = 0;
-      this.item.salesPrice = 0;
-      this.item.totalItem = 0;
-      this.item.productUnitCost = 0;
-      this.item.totalCost = 0;
-      this.item.tax = 0;
-      this.item.margin = 0;
+
+      this.item = this.getItemNovo();
+      this.itemOriginal = this.getItemNovo();
 
       this.pedido = new Object();
       this.pedido.number = 0;
@@ -115,15 +109,20 @@ export class EditarItemPedidoComponent implements OnInit {
       this.pedido.totalOrder = 0;
       this.pedido.qtdeItens = 0;
 
-      this.itemOriginal = new Object();
-      this.itemOriginal.productName = '';
-      this.itemOriginal.quantidade = 0;
-      this.itemOriginal.salesPrice = 0;
-      this.itemOriginal.totalItem = 0;
-      this.itemOriginal.productUnitCost = 0;
-      this.itemOriginal.totalCost = 0;
-      this.itemOriginal.tax = 0;
-      this.itemOriginal.margin = 0;
+  }
+
+  private getItemNovo() {
+    const item = {
+      productName: '',
+      quantidade: 0,
+      salesPrice: 0,
+      totalItem: 0,
+      productUnitCost: 0,
+      totalCost: 0,
+      tax: 0,
+      margin: 0
+    }
+    return item;
   }
 
 }
