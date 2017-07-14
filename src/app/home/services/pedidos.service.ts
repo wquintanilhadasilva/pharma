@@ -1,6 +1,15 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable, OnInit } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import {
+  Http,
+  Response,
+  Headers,
+  RequestMethod,
+  RequestOptions,
+  URLSearchParams,
+  RequestOptionsArgs,
+  ResponseContentType
+} from '@angular/http';
 
 import { ItemOrder } from './../../domain/ItemOrder';
 import { Order } from './../../domain/Order';
@@ -41,10 +50,11 @@ export class PedidosService implements OnInit {
    }
 
   getPedidos(): Observable<Order[]> {
-
-    return this.http.get('http://localhost:54536/api/pedidos', this.getOptions())
+    return this.http.get('http://localhost:54536/api/pedidos',
+          this.getOptions(RequestMethod.Get))
           .map((res: Response)  => {
-            return res.json();
+            const r = res.json();
+            return r || {};
           }); /*{
             <Order[]> res.json();
             let body = res.json();
@@ -62,13 +72,13 @@ export class PedidosService implements OnInit {
   public getPedido(id: string) {
 
     // return this.getPedidos().find((p: Order)  => p.number === id);
-    return this.http.get('http://localhost:54536/api/pedidos/' + id, this.getOptions()).map(response => response.json());
+    return this.http.get('http://localhost:54536/api/pedidos/' + id, this.getOptions(RequestMethod.Get)).map(response => response.json());
   }
 
-  public gravarPedido(pedido: Order) {
+  public gravarPedido(pedido) {
 
-    let body = JSON.stringify(pedido);
-    this.http.put('http://localhost:54536/api/pedidos/' + pedido.number, body, this.getOptions() );
+    const body = JSON.stringify(pedido);
+    this.http.put('http://localhost:54536/api/pedidos/' + pedido.number, body, this.getOptions(RequestMethod.Put) );
 
     // let idx = this.listaDePedidos.findIndex((x: Order) => x.number === pedido.number);
     // console.log(idx);
@@ -79,8 +89,45 @@ export class PedidosService implements OnInit {
 
   }
 
-  private getOptions() {
+  public calcularValoresPedido(pedido): Observable<any> {
+    const pedidoJson = JSON.stringify(pedido);
+    return this.http.post('http://localhost:54536/api/pedidos/calcularValoresPedido',
+              pedidoJson,
+              this.getOptions(RequestMethod.Post))
+                .map(
+                  response => {
+                    let r = response.json();
+                    return r || {};
+                  }
+                );
 
+  }
+
+  public calcularValoresItem(item): Observable<any> {
+    const itemJson = JSON.stringify(item);
+    return this.http.post('http://localhost:54536/api/pedidos/calcularValoresItem',
+                itemJson,
+                this.getOptions(RequestMethod.Post))
+                .map(
+                  response => {
+                    let r = response.json();
+                    return r || {};
+                  }
+                );
+
+  }
+
+  private getOptions(method) {
+
+    const options = new RequestOptions({
+      headers: this.getHeaders()
+      // method: method
+    });
+
+    return options;
+  }
+
+  private getHeaders() {
     const headers: Headers = new Headers();
     headers.append('Accept', 'application/json');
     headers.append('Content-Type', 'application/json');
@@ -89,11 +136,7 @@ export class PedidosService implements OnInit {
     headers.append('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     // headers.append('Access-Control-Allow-Credentials', 'true');
 
-    const options = new RequestOptions({
-      headers: headers
-    });
-
-    return options;
+    return headers;
   }
 
 }

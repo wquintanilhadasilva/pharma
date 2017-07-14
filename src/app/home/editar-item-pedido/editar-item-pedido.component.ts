@@ -1,4 +1,3 @@
-import { Order } from './../../domain/Order';
 import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
@@ -6,6 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
+import { PedidosService } from './../services/pedidos.service';
+import { Order } from './../../domain/Order';
 import { ItemOrder } from './../../domain/ItemOrder';
 import { FaturamentoService } from './../services/faturamento.service';
 
@@ -47,7 +48,8 @@ export class EditarItemPedidoComponent implements OnInit {
       .map(term => term === '' ? []
         : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
-  constructor(private faturamentoService: FaturamentoService) {
+  constructor(private faturamentoService: FaturamentoService,
+              private pedidoService: PedidosService) {
   }
 
   ngOnInit() {
@@ -85,6 +87,32 @@ export class EditarItemPedidoComponent implements OnInit {
     this.emitCloseEvent(true, this.item);
   }
 
+  calcularMargem() {
+    /**
+     * Toda vez que calcular, tem que atualizar:
+     *    Custo total do item do pedido;
+     *    Valor total do Item do pedido;
+     *    Margem do item do pedido;
+     *
+     *    Valor total do pedido
+     *    Margem do pedido
+     *    Quantidade de itens no pedido
+     *    Custo total do pedido
+     *
+     *    Projeção da Margem Global
+     *    Projeção do Faturamento Global
+     *
+     *    Considerar a quantidade e o preço de venda do item
+     */
+    // this.pedidoService.calcularValoresPedido(this.pedido).subscribe(r => {
+     // this.pedido = r;
+    // });
+    this.pedidoService.calcularValoresItem(this.item).subscribe(r => {
+      this.item = r;
+    });
+
+  }
+
   private cloneItem() {
     this.item =  Object.assign(new Object(), this.itemOriginal);
   }
@@ -108,11 +136,11 @@ export class EditarItemPedidoComponent implements OnInit {
       this.pedido.margin = 0;
       this.pedido.totalOrder = 0;
       this.pedido.qtdeItens = 0;
-
   }
 
   private getItemNovo() {
     const item = {
+      number: 0,
       productName: '',
       quantidade: 0,
       salesPrice: 0,
