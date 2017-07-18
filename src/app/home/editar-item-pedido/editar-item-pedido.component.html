@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col-6">
             <label for="tax" class="control-label">Margem Global</label>
-            <input [value]="faturamentoService.obtemMargemGlobal() | number:'1.2'" disabled type="text" class="form-control" id="tax">
+            <input [value]="margemGlobal | number:'1.2'" disabled type="text" class="form-control" id="tax">
           </div>
           <div class="col-6">
             <label for="productUnitCost" class="control-label">Margem do Pedido</label>
@@ -32,7 +32,7 @@
                     placeholder="Entre com as iniciais do produto" 
                     id="typeahead-format" 
                     type="text" 
-                    class="form-control" 
+                    class="form-control"
                     [(ngModel)]="item.productName" 
                     [ngbTypeahead]="search" 
                     [resultFormatter]="formatter"
@@ -62,18 +62,22 @@
         <div class="row">
           <div class="col-6">
             <label for="quantidade" class="control-label">Quantidade</label>
-            <input [(ngModel)]="item.quantidade" type="number" data-bind="value:replyNumber" class="form-control" id="quantidade">
+            <input [(ngModel)]="item.quantidade" (ngModelChange)="onEdit()" type="number" data-bind="value:replyNumber" class="form-control" id="quantidade">
           </div>
           <div class="col-6">
             <label for="salesPrice" class="control-label">Preço de venda</label>
-            <input [(ngModel)]="item.salesPrice" type="number" data-bind="value:replyNumber" class="form-control" id="salesPrice">
+            <input [(ngModel)]="item.salesPrice" (ngModelChange)="onEdit()" type="number" data-bind="value:replyNumber" class="form-control" id="salesPrice">
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" (click)="calcularMargem()" class="btn btn-default">Calcular Margem</button>
-        <button type="button" (click)="closeCancel()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" (click)="closeConfirm()" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
+        <div class="row">
+          <div class="col-12 text-center">
+            <button type="button" [disabled]="editado" (click)="calcularMargem()" [ngClass]="{'btn-default': editado, 'btn-success': !editado}" class="btn">Recalcular</button>
+            <button type="button" (click)="closeCancel()" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" [disabled]="!editado" (click)="closeConfirm()" [ngClass]="{'btn-default': !editado, 'btn-primary': editado}" class="btn" data-dismiss="modal">Confirmar</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

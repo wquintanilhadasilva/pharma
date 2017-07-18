@@ -34,6 +34,10 @@ export class EditarItemPedidoComponent implements OnInit {
   itemOriginal;
   pedido;
 
+  editado = false;
+
+  margemGlobal = 0;
+
   novoItem = false;
 
   exibir = false;
@@ -48,9 +52,7 @@ export class EditarItemPedidoComponent implements OnInit {
       .map(term => term === '' ? []
         : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
-  constructor(private faturamentoService: FaturamentoService,
-              private pedidoService: PedidosService) {
-  }
+  constructor(private pedidoService: PedidosService) {}
 
   ngOnInit() {
     this.inicializa();
@@ -72,6 +74,11 @@ export class EditarItemPedidoComponent implements OnInit {
     setTimeout(() => {
       this.btnShow.nativeElement.click();
     }, 100);
+
+    this.calcValores();
+
+    this.editado = false;
+
   }
 
   selectItem(item) {
@@ -88,7 +95,16 @@ export class EditarItemPedidoComponent implements OnInit {
   }
 
   calcularMargem() {
-    /**
+    this.calcValores();
+    this.editado = true;
+  }
+
+  onEdit() {
+    this.editado = false;
+  }
+
+  private calcValores() {
+/**
      * Toda vez que calcular, tem que atualizar:
      *    Custo total do item do pedido;
      *    Valor total do Item do pedido;
@@ -104,13 +120,22 @@ export class EditarItemPedidoComponent implements OnInit {
      *
      *    Considerar a quantidade e o preço de venda do item
      */
-    // this.pedidoService.calcularValoresPedido(this.pedido).subscribe(r => {
-     // this.pedido = r;
-    // });
-    this.pedidoService.calcularValoresItem(this.item).subscribe(r => {
-      this.item = r;
+    this.pedidoService.calcularValoresPedido(this.pedido).subscribe(r => {
+      this.pedido = r;
     });
 
+    this.pedidoService.calcularValoresItem(this.item).subscribe(r => {
+      this.item = r;
+      this.getGlobalMargin();
+    });
+  }
+
+  private getGlobalMargin() {
+    this.pedidoService.calculaMargemGlobal(this.pedido).subscribe(
+      r => {
+        this.margemGlobal = r;
+      }
+    );
   }
 
   private cloneItem() {
@@ -124,18 +149,20 @@ export class EditarItemPedidoComponent implements OnInit {
 
   private inicializa() {
 
-      this.item = this.getItemNovo();
-      this.itemOriginal = this.getItemNovo();
+    this.editado = false;
 
-      this.pedido = new Object();
-      this.pedido.number = 0;
-      this.pedido.date = new Date();
-      this.pedido.customer = '';
-      this.pedido.status = 'Pendente';
-      this.pedido.itens = [];
-      this.pedido.margin = 0;
-      this.pedido.totalOrder = 0;
-      this.pedido.qtdeItens = 0;
+    this.item = this.getItemNovo();
+    this.itemOriginal = this.getItemNovo();
+
+    this.pedido = new Object();
+    this.pedido.number = 0;
+    this.pedido.date = new Date();
+    this.pedido.customer = '';
+    this.pedido.status = 'Pendente';
+    this.pedido.itens = [];
+    this.pedido.margin = 0;
+    this.pedido.totalOrder = 0;
+    this.pedido.qtdeItens = 0;
   }
 
   private getItemNovo() {

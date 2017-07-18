@@ -22,7 +22,6 @@ export class PedidosService implements OnInit {
   public listaDePedidos: any[] = [];
 
   constructor(private http: Http) {
-    console.log('inicio service');
     this.listaDePedidos = [];
     /*
     for (let i = 1; i <= 30; i++) {
@@ -49,7 +48,7 @@ export class PedidosService implements OnInit {
    ngOnInit() {
    }
 
-  getPedidos(): Observable<Order[]> {
+  getPedidos(): Observable<any[]> {
     return this.http.get('http://localhost:54536/api/pedidos',
           this.getOptions(RequestMethod.Get))
           .map((res: Response)  => {
@@ -107,6 +106,20 @@ export class PedidosService implements OnInit {
     const itemJson = JSON.stringify(item);
     return this.http.post('http://localhost:54536/api/pedidos/calcularValoresItem',
                 itemJson,
+                this.getOptions(RequestMethod.Post))
+                .map(
+                  response => {
+                    let r = response.json();
+                    return r || {};
+                  }
+                );
+
+  }
+
+  public calculaMargemGlobal(pedido): Observable<any> {
+    const pedidoJson = JSON.stringify(pedido);
+    return this.http.post('http://localhost:54536/api/pedidos/getMargemGlobal',
+                pedidoJson,
                 this.getOptions(RequestMethod.Post))
                 .map(
                   response => {

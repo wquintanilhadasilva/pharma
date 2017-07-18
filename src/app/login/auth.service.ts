@@ -56,8 +56,7 @@ export class AuthService {
   }
 
   usuarioEstaAutenticado(): boolean {
-    let logado = sessionStorage.getItem(this.loginKey);
-    console.log(logado);
+    const logado = sessionStorage.getItem(this.loginKey);
     return logado === this.loginKeyValueTrue ? true : false;
   }
 

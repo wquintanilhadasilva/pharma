@@ -30,10 +30,10 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscricao = this.activateRouted.data.subscribe(
-      (info: {pedido: Order}) => {
-        console.log(info);
+      (info: {pedido: any}) => {
+        // Obtém o pedido enviado pelo router. note que o pedido foi
+        // obtido pelo resolver de pedidos ao mudar a rota
         this.pedido = info.pedido;
-        console.log(this.pedido);
       }
     );
   }
