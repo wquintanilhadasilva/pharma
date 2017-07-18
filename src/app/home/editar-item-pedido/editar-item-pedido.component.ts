@@ -120,17 +120,35 @@ export class EditarItemPedidoComponent implements OnInit {
          *
          *    Considerar a quantidade e o preço de venda do item
          */
-    this.pedidoService.calcularValoresPedido(this.pedido).subscribe(r => {
-      this.pedido = r;
-    });
-
     this.pedidoService.calcularValoresItem(this.item).subscribe(r => {
       this.item = r;
-      this.getGlobalMargin();
+      // Ajusta os valores do item no array de itens do pedido
+      // this.adjustItemInOrder(this.item);
+      this.getOrderChangedMargin();
     });
   }
 
-  private getGlobalMargin() {
+  /**private adjustItemInOrder(item) {
+
+    this.pedido.itens.forEach(i => {
+      if (i.id === item.id) {
+        i.quantidade = item.quantidade;
+        i.salesPrice = item.salesPrice;
+        i.totalItem = item.totalItem;
+        i.totalCost = item.totalCost;
+        i.tax = item.tax;
+      }
+    });
+
+  } */
+
+  private getOrderChangedMargin() {
+    this.pedidoService.calcularValoresPedido(this.pedido).subscribe(r => {
+      this.pedido = r;
+    });
+  }
+
+  private getOrderMargin() {
     this.pedidoService.calculaMargemGlobal(this.pedido).subscribe(
       r => {
         this.margemGlobal = r;
