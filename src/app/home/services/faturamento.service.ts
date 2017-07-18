@@ -1,50 +1,56 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Http, RequestMethod, RequestOptions, Headers } from '@angular/http';
 
-import { Order } from './../../domain/Order';
-import { PedidosService } from './pedidos.service';
 import { Faturamento } from './../../domain/faturamento';
 
 @Injectable()
-export class FaturamentoService {
+export class FaturamentoService implements OnInit {
 
-  private static movimento: Faturamento;
+  public indicadores: Faturamento;
 
-  constructor(private pedidosService: PedidosService) {
-    FaturamentoService.movimento = new Faturamento();
+  constructor(private http: Http) {
+    this.indicadores = new Faturamento();
   }
 
-  public getFaturamento(): Faturamento {
-
-    FaturamentoService.movimento.referencia = this. obtemReferenciaAtual();
-    FaturamentoService.movimento.faturamentoGlobal = this.obtemFaturamentoTotal();
-    FaturamentoService.movimento.margemGlobal = this.obtemMargemGlobal();
-    FaturamentoService.movimento.qtdePedidosGlobal = this.pedidosService.obtemTotalDePedidos();
-
-    return FaturamentoService.movimento;
+  ngOnInit(): void {
   }
 
-  public obtemMargemGlobal() {
-    let margin = 0;
-    /*this.pedidosService.getPedidos().forEach(
-      (p: Order) => {
-        margin += p.getMargin();
-      }
-    );*/
-    return margin;
+  public atualizaIndicadores() {
+
+    this.getFaturamento().subscribe(f => {
+      this.indicadores.referencia = f.referencia;
+      this.indicadores.faturamentoGlobal = f.faturamentoGlobal;
+      this.indicadores.margemGlobal = f.margemGlobal;
+      this.indicadores.qtdePedidosGlobal = f.qtdePedidosGlobal;
+    });
   }
 
-  public obtemFaturamentoTotal(): number {
-    let total = 0;
-    /*this.pedidosService.getPedidos().forEach(
-      (p: Order) => {
-        total += p.getTotalOrder();
-      }
-    );*/
-    return total;
+  private getFaturamento(): Observable<Faturamento> {
+
+    return this.http.get('http://localhost:54536/api/pedidos/getIndicadoresGlobais',
+          this.getOptions(RequestMethod.Get)).map(response => response.json() || {});
   }
 
-  public obtemReferenciaAtual() {
-    return '06/2017';
+  private getOptions(method) {
+
+    const options = new RequestOptions({
+      headers: this.getHeaders()
+    });
+
+    return options;
+  }
+
+  private getHeaders() {
+    const headers: Headers = new Headers();
+    headers.append('Accept', 'application/json');
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    headers.append('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    // headers.append('Access-Control-Allow-Credentials', 'true');
+
+    return headers;
   }
 
 }

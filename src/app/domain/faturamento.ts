@@ -20,6 +20,11 @@ export class Faturamento {
     public qtdePedidosGlobal: number;
     public faturamentoGlobal: number;
 
-    constructor() {}
+    constructor() {
+        this.referencia = '';
+        this.margemGlobal = 0;
+        this.qtdePedidosGlobal = 0;
+        this.faturamentoGlobal = 0;
+    }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -52,7 +52,7 @@ export class EditarItemPedidoComponent implements OnInit {
       .map(term => term === '' ? []
         : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
-  constructor(private pedidoService: PedidosService) {}
+  constructor(private pedidoService: PedidosService) { }
 
   ngOnInit() {
     this.inicializa();
@@ -64,7 +64,7 @@ export class EditarItemPedidoComponent implements OnInit {
     if (it === null) {
       this.inicializa();
       this.novoItem = true;
-    }else {
+    } else {
       this.itemOriginal = it;
       this.cloneItem();
       this.novoItem = false;
@@ -104,22 +104,22 @@ export class EditarItemPedidoComponent implements OnInit {
   }
 
   private calcValores() {
-/**
-     * Toda vez que calcular, tem que atualizar:
-     *    Custo total do item do pedido;
-     *    Valor total do Item do pedido;
-     *    Margem do item do pedido;
-     *
-     *    Valor total do pedido
-     *    Margem do pedido
-     *    Quantidade de itens no pedido
-     *    Custo total do pedido
-     *
-     *    Projeção da Margem Global
-     *    Projeção do Faturamento Global
-     *
-     *    Considerar a quantidade e o preço de venda do item
-     */
+    /**
+         * Toda vez que calcular, tem que atualizar:
+         *    Custo total do item do pedido;
+         *    Valor total do Item do pedido;
+         *    Margem do item do pedido;
+         *
+         *    Valor total do pedido
+         *    Margem do pedido
+         *    Quantidade de itens no pedido
+         *    Custo total do pedido
+         *
+         *    Projeção da Margem Global
+         *    Projeção do Faturamento Global
+         *
+         *    Considerar a quantidade e o preço de venda do item
+         */
     this.pedidoService.calcularValoresPedido(this.pedido).subscribe(r => {
       this.pedido = r;
     });
@@ -139,11 +139,11 @@ export class EditarItemPedidoComponent implements OnInit {
   }
 
   private cloneItem() {
-    this.item =  Object.assign(new Object(), this.itemOriginal);
+    this.item = Object.assign(new Object(), this.itemOriginal);
   }
 
   private emitCloseEvent(value, itemPedido) {
-    this.editClose.emit({confirmado: value, novoItem: this.novoItem, item: itemPedido});
+    this.editClose.emit({ confirmado: value, novoItem: this.novoItem, item: itemPedido });
     this.exibir = false;
   }
 

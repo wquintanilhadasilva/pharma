@@ -1,12 +1,20 @@
-import { PedidosService } from './../services/pedidos.service';
-import { ItemOrder } from './../../domain/ItemOrder';
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { FaturamentoService } from './../services/faturamento.service';
 import { EditarItemPedidoComponent } from './../editar-item-pedido/editar-item-pedido.component';
-import { Order } from './../../domain/Order';
+import { Faturamento } from './../../domain/faturamento';
+import { PedidosService } from './../services/pedidos.service';
 
 @Component({
   selector: 'app-editar-pedidos',
@@ -18,13 +26,14 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
   pedido;
   itemSelecionado;
   subscricao: Subscription;
+  indicadores: Faturamento;
 
   @ViewChild('editarItem') editarItem: EditarItemPedidoComponent;
 
   constructor(
     private activateRouted: ActivatedRoute,
     private route: Router,
-    public faturamentoService: FaturamentoService,
+    private faturamentoService: FaturamentoService,
     private pedidosService: PedidosService
   ) { }
 
@@ -36,6 +45,7 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
         this.pedido = info.pedido;
       }
     );
+    this.indicadores = this.faturamentoService.indicadores;
   }
 
   voltar() {

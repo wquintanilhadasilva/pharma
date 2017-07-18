@@ -21,21 +21,21 @@
                                 <h6><small>
                                     Referência
                                     <br/>
-                                    {{faturamentoService.obtemReferenciaAtual()}}
+                                    {{indicadores.referencia}}
                                 </small></h6>
                             </div>
                             <div class="col-4">
                                 <h6><small>
                                     Fat. Global
                                     <br/>
-                                    {{faturamentoService.obtemFaturamentoTotal() | currency:'BRL':true:'3.2'}}
+                                    {{indicadores.faturamentoGlobal | currency:'BRL':true:'3.2'}}
                                 </small></h6>
                             </div>
                             <div class="col-4">
                                 <h6><small>
                                     Margem Global
                                     <br/>
-                                    <mark>{{faturamentoService.obtemMargemGlobal() | number:'1.2'}}</mark>
+                                    <mark>{{indicadores.margemGlobal | number:'1.2'}}</mark>
                                 </small></h6>
                             </div>
                         </div>

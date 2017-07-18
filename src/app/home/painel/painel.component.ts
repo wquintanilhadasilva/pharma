@@ -15,7 +15,8 @@ export class PainelComponent implements OnInit {
   constructor(private faturamentoService: FaturamentoService) { }
 
   ngOnInit() {
-    this.faturamento = this.faturamentoService.getFaturamento() ;
+    this.faturamentoService.atualizaIndicadores() ;
+    this.faturamento = this.faturamentoService.indicadores;
   }
 
 }
