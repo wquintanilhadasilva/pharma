@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="titulo">
-          Editar Item - Nº Pedido: <mark>{{pedido.number}}</mark>
+          Editar Item - Nº Pedido: <mark>{{pedidoSimulado.number}}</mark>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -19,7 +19,7 @@
           </div>
           <div class="col-6">
             <label for="productUnitCost" class="control-label">Margem do Pedido</label>
-            <input [value]="pedido.margin | number:'1.2'" disabled type="text" class="form-control" id="productUnitCost">
+            <input [value]="pedidoSimulado.margin | number:'1.2'" disabled type="text" class="form-control" id="productUnitCost">
           </div>
         </div>
         <hr>

@@ -75,6 +75,8 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
     if (value.confirmado) {
       if (!value.novoItem) {
         this.mudarDadosItem(value.item);
+        // atualiza os indicadores do pedido
+        this.getOrderChangedMargin();
       }else {
         // Novo item, add ao pedido
         this.pedido.itens.push(value.item);
@@ -97,7 +99,14 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
   }
 
   private mudarDadosItem(novoItem) {
-    Object.assign(this.itemSelecionado, novoItem);
+    this.itemSelecionado = Object.assign(this.itemSelecionado, novoItem);
+  }
+
+   private getOrderChangedMargin() {
+    // const pedClone = this.clonePedidoToSimulate();
+    this.pedidosService.calcularValoresPedido(this.pedido).subscribe(r => {
+      this.pedido = r;
+    });
   }
 
 }

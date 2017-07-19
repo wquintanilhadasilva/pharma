@@ -33,6 +33,7 @@ export class EditarItemPedidoComponent implements OnInit {
   item;
   itemOriginal;
   pedido;
+  pedidoSimulado;
 
   editado = false;
 
@@ -70,14 +71,22 @@ export class EditarItemPedidoComponent implements OnInit {
       this.novoItem = false;
     }
     this.pedido = ped;
+    // clona o pedido para que a simulação não afete o
+    // pedido original até que o confirmar seja acionado
+    this.pedidoSimulado = Object.assign(new Object(), this.pedido);
+
     // Espera montar o elemento no template para disparar
     setTimeout(() => {
       this.btnShow.nativeElement.click();
     }, 100);
 
-    this.calcValores();
-
     this.editado = false;
+
+    // Carrega e exibe a margem do pedido
+    this.getOrderChangedMargin();
+
+    // Carrega e exibe a margem global
+    this.getGlobalMargin();
 
   }
 
@@ -123,38 +132,58 @@ export class EditarItemPedidoComponent implements OnInit {
     this.pedidoService.calcularValoresItem(this.item).subscribe(r => {
       this.item = r;
       // Ajusta os valores do item no array de itens do pedido
-      // this.adjustItemInOrder(this.item);
+      this.adjustItemInOrder(this.item);
       this.getOrderChangedMargin();
     });
   }
 
-  /**private adjustItemInOrder(item) {
+  private adjustItemInOrder(item) {
 
-    this.pedido.itens.forEach(i => {
+    this.pedidoSimulado.itens.forEach(i => {
       if (i.id === item.id) {
-        i.quantidade = item.quantidade;
+        i = Object.assign(i, item);
+        /*i.quantidade = item.quantidade;
         i.salesPrice = item.salesPrice;
         i.totalItem = item.totalItem;
         i.totalCost = item.totalCost;
-        i.tax = item.tax;
+        i.tax = item.tax;*/
       }
     });
 
-  } */
+  }
 
   private getOrderChangedMargin() {
-    this.pedidoService.calcularValoresPedido(this.pedido).subscribe(r => {
-      this.pedido = r;
+    // const pedClone = this.clonePedidoToSimulate();
+    this.pedidoService.calcularValoresPedido(this.pedidoSimulado).subscribe(r => {
+      this.pedidoSimulado = r;
+      // Recalcula a margem global para simulação conforme mudanças efetuadas no pedido
+      this.getGlobalMargin();
     });
   }
 
-  private getOrderMargin() {
-    this.pedidoService.calculaMargemGlobal(this.pedido).subscribe(
+  private getGlobalMargin() {
+    // Clona o pedido para simular a nova margem com ele...
+    // const pedClone = this.clonePedidoToSimulate();
+    this.pedidoService.calculaMargemGlobal(this.pedidoSimulado).subscribe(
       r => {
         this.margemGlobal = r;
       }
     );
   }
+
+  /*private clonePedidoToSimulate() {
+    this.pedidoSimulado = Object.assign(new Object(), this.pedido);
+    // Agora substitui o item do pedido simulado pelo item modificado
+      for (let i of this.pedidoSimulado.itens) {
+        if (i.id === this.item.id) {
+          // Troca o item do pedido clonado pelo item modificado
+          i = Object.assign(i, this.item);
+          break;
+        }
+      }
+
+      return p;
+  } */
 
   private cloneItem() {
     this.item = Object.assign(new Object(), this.itemOriginal);

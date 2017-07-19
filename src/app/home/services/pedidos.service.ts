@@ -116,7 +116,11 @@ export class PedidosService implements OnInit {
 
   }
 
-  public calculaMargemGlobal(pedido): Observable<any> {
+  /**
+   * Calcula a margem global, considerando os novos valores do pedido (edição de itens)
+   * @param pedido da simulação da nova margem global
+   */
+  public calculaMargemGlobal(pedido): Observable<number> {
     const pedidoJson = JSON.stringify(pedido);
     return this.http.post('http://localhost:54536/api/pedidos/getMargemGlobal',
                 pedidoJson,
@@ -124,7 +128,7 @@ export class PedidosService implements OnInit {
                 .map(
                   response => {
                     let r = response.json();
-                    return r || {};
+                    return r || 0;
                   }
                 );
 
