@@ -88,14 +88,12 @@ export class EditarPedidosComponent implements OnInit, OnDestroy {
   descartar() {
     // Recupera o pedido original do service
     this.pedidosService.getPedido(this.pedido.number).subscribe(data => this.pedido = data);
-    // this.pedido = this.pedidosService.getPedido(this.pedido.number);
   }
 
   gravar () {
     // TODO gravar o pedido atualizado no service
     this.pedidosService.gravarPedido(this.pedido);
     this.pedidosService.getPedido(this.pedido.number).subscribe(data => this.pedido = data);
-    // this.pedido = this.pedidosService.getPedido(this.pedido.number);
   }
 
   private mudarDadosItem(novoItem) {

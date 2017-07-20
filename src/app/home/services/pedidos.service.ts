@@ -134,6 +134,16 @@ export class PedidosService implements OnInit {
 
   }
 
+  public listarProdutos(filtro: string): Observable<any> {
+
+    return this.http.get('http://localhost:54536/api/pedidos/getProdutos/' + filtro,
+              this.getOptions(RequestMethod.Get))
+              .map( response => {
+                const r = response.json();
+                return r || {};
+              });
+  }
+
   private getOptions(method) {
 
     const options = new RequestOptions({

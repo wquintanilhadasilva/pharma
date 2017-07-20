@@ -43,21 +43,45 @@ export class EditarItemPedidoComponent implements OnInit {
 
   exibir = false;
 
-  // Define o que deve ser exibido na lista (qual atributo do objeto)
-  formatter = (result: string) => result.toUpperCase();
+  produtos = [];
 
-  search = (text$: Observable<string>) =>
+  // Define o que deve ser exibido na lista (qual atributo do objeto)
+  formatter = (result: any) => result.productName;
+
+  /*search = (text$: Observable<string>) =>
     text$
       .debounceTime(200)
       .distinctUntilChanged()
       .map(term => term === '' ? []
-        : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+        : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));*/
+
+  search = (text$: Observable<any>) =>
+    text$
+      .debounceTime(200)
+      .distinctUntilChanged()
+      .map(term => {
+        if (term === '') {
+          return []
+        } else {
+          this.carregaProdutos(term);
+          return this.produtos.length === 0 ? [] : this.produtos.slice(0, 10);
+        }
+      });
 
   constructor(private pedidoService: PedidosService) { }
+
 
   ngOnInit() {
     this.inicializa();
     console.log('init');
+  }
+
+
+  private carregaProdutos(filtro) {
+    this.pedidoService.listarProdutos(filtro).subscribe(r => {
+      this.produtos = r;
+      console.log(this.produtos);
+    });
   }
 
   show(it, ped) {
@@ -92,6 +116,11 @@ export class EditarItemPedidoComponent implements OnInit {
 
   selectItem(item) {
     console.log(item);
+    this.item.productName = item.productName;
+    this.item.number = item.number;
+    this.item.salesPrice = item.salesPrice;
+    this.item.productUnitCost = item.productUnitCost;
+    this.item.tax = item.tax;
   }
 
   closeCancel() {
