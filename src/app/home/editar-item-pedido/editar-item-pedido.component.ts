@@ -4,11 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/toPromise';
 
 import { PedidosService } from './../services/pedidos.service';
 import { Order } from './../../domain/Order';
 import { ItemOrder } from './../../domain/ItemOrder';
 import { FaturamentoService } from './../services/faturamento.service';
+
 
 const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'California', 'Colorado',
   'Connecticut', 'Delaware', 'District Of Columbia', 'Federated States Of Micronesia', 'Florida', 'Georgia',
@@ -63,8 +65,12 @@ export class EditarItemPedidoComponent implements OnInit {
         if (term === '') {
           return []
         } else {
-          this.carregaProdutos(term);
-          return this.produtos.length === 0 ? [] : this.produtos.slice(0, 10);
+          this.carregaProdutos(term).toPromise().
+          then(r => {
+            this.produtos = r;
+            console.log(this.produtos);
+          });
+          // return this.produtos.length === 0 ? [] : this.produtos.slice(0, 10);
         }
       });
 
@@ -76,13 +82,17 @@ export class EditarItemPedidoComponent implements OnInit {
     console.log('init');
   }
 
-
-  private carregaProdutos(filtro) {
-    this.pedidoService.listarProdutos(filtro).subscribe(r => {
+private carregaProdutos(filtro): Observable<any> {
+    return this.pedidoService.listarProdutos(filtro);
+  }
+  /*
+  private carregaProdutos(filtro) : Observable<any> {
+    return this.pedidoService.listarProdutos(filtro).subscribe(r => {
       this.produtos = r;
       console.log(this.produtos);
     });
   }
+  */
 
   show(it, ped) {
     this.exibir = true;
