@@ -157,13 +157,11 @@ private carregaProdutos(filtro): Observable<any> {
   }
 
   selectItem(item) {
-    console.log(item);
     this.item.productName = item.productName;
     this.item.number = item.number;
     this.item.salesPrice = item.salesPrice;
     this.item.productUnitCost = item.productUnitCost;
     this.item.tax = item.tax;
-    console.log(this.item);
   }
 
   closeCancel() {
