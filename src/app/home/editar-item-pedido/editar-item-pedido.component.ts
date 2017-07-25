@@ -95,7 +95,9 @@ export class EditarItemPedidoComponent implements OnInit {
           () => this.searching = true),
         term =>
           _catch.call(
-            _do.call(this.carregaProdutos(term), () => this.searchFailed = false),
+            _do.call(this.carregaProdutos(term)
+                  .map((i: any[]) => i.slice(0, 10)),
+                  () => this.searchFailed = false),
             () => {
               this.searchFailed = true;
               return of.call([]);
@@ -161,6 +163,7 @@ private carregaProdutos(filtro): Observable<any> {
     this.item.salesPrice = item.salesPrice;
     this.item.productUnitCost = item.productUnitCost;
     this.item.tax = item.tax;
+    console.log(this.item);
   }
 
   closeCancel() {

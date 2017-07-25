@@ -27,13 +27,13 @@
           <div class="col-12">
             <label for="productName" class="control-label">Produto</label>
             <input *ngIf="!novoItem" [value]="item.productName" disabled type="text" class="form-control" id="productName">
-            <input *ngIf="novoItem" (selectItem)="selectItem($event)" 
+            <input *ngIf="novoItem" (selectItem)="selectItem($event.item)" 
                     autofocus style="color: orange;" 
                     placeholder="Entre com as iniciais do produto" 
                     id="typeahead-format" 
                     type="text" 
                     class="form-control"
-                    [(ngModel)]="item.productName" 
+                    [ngModel]="item.productName" 
                     [ngbTypeahead]="search" 
                     [resultFormatter]="formatter"
                     [resultTemplate]="rt"/> <!-- vide lá no final -->
