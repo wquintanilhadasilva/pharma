@@ -1,10 +1,18 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
+
 import { Observable } from 'rxjs/Observable';
+import {debounceTime} from 'rxjs/operator/debounceTime';
+import {distinctUntilChanged} from 'rxjs/operator/distinctUntilChanged';
+import {switchMap} from 'rxjs/operator/switchMap';
+import {_do} from 'rxjs/operator/do';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
+import {_catch} from 'rxjs/operator/catch';
+import {of} from 'rxjs/observable/of';
+// import 'rxjs/add/operator/debounceTime';
+// import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/toPromise';
+
 
 import { PedidosService } from './../services/pedidos.service';
 import { Order } from './../../domain/Order';
@@ -45,10 +53,13 @@ export class EditarItemPedidoComponent implements OnInit {
 
   exibir = false;
 
-  produtos = [];
+  searching = false;
+  searchFailed = false;
+
+  // produtos = [];
 
   // Define o que deve ser exibido na lista (qual atributo do objeto)
-  formatter = (result: any) => result.productName;
+  formatter = (result: any) => result;
 
   /*search = (text$: Observable<string>) =>
     text$
@@ -57,7 +68,7 @@ export class EditarItemPedidoComponent implements OnInit {
       .map(term => term === '' ? []
         : states.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));*/
 
-  search = (text$: Observable<any>) =>
+ /* search = (text$: Observable<any>) =>
     text$
       .debounceTime(200)
       .distinctUntilChanged()
@@ -73,6 +84,25 @@ export class EditarItemPedidoComponent implements OnInit {
           // return this.produtos.length === 0 ? [] : this.produtos.slice(0, 10);
         }
       });
+    */
+
+  search = (text$: Observable<string>) =>
+    _do.call(
+      switchMap.call(
+        _do.call(
+          distinctUntilChanged.call(
+            debounceTime.call(text$, 300)),
+          () => this.searching = true),
+        term =>
+          _catch.call(
+            _do.call(this.carregaProdutos(term), () => this.searchFailed = false),
+            () => {
+              this.searchFailed = true;
+              return of.call([]);
+            }
+          )
+      ),
+      () => this.searching = false);
 
   constructor(private pedidoService: PedidosService) { }
 

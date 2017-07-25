@@ -140,7 +140,7 @@ export class PedidosService implements OnInit {
               this.getOptions(RequestMethod.Get))
               .map( response => {
                 const r = response.json();
-                return r || {};
+                return r || [];
               });
   }
 
