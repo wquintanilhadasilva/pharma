@@ -37,9 +37,13 @@
                     [ngbTypeahead]="search" 
                     [resultFormatter]="formatter"
                     [resultTemplate]="rt"/> <!-- vide lá no final -->
-            <span *ngIf="searching">pesquisando...</span>
-            <div class="form-control-feedback" 
-                  *ngIf="searchFailed">Desculpe, não foi possível carregar os produtos.</div>
+            <div *ngIf="searching">
+              <i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>
+              <span class="small">pesquisando...</span>
+            </div>
+            <div class="form-control-feedback" *ngIf="searchFailed">
+              <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+              <span class="text-danger small">Desculpe, não foi possível carregar os produtos!</span></div>
           </div>
         </div>
         <div class="row">
